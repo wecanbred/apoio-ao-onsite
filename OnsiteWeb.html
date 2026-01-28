@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Apoio ao On-Site | Hub de Serviços</title>
+    <style>
+        /* Estilo Geral */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f4f7f6;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        header {
+            background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+            color: white;
+            padding: 40px 20px;
+            text-align: center;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        h1 { margin: 0; font-size: 2.5rem; letter-spacing: 1px; }
+        p.subtitle { opacity: 0.9; margin-top: 10px; }
+
+        /* Container dos Cards */
+        .container {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 25px;
+            padding: 50px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* O "Card" Moderno */
+        .card {
+            background: white;
+            border-radius: 15px;
+            width: 300px;
+            padding: 30px;
+            text-align: center;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            text-decoration: none;
+            color: #333;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            border-top: 5px solid transparent;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+        }
+
+        /* Cores específicas para cada card */
+        .card.solicitacao { border-top-color: #6a11cb; }
+        .card.desligamento { border-top-color: #ff4b2b; }
+        .card.voucher { border-top-color: #2575fc; }
+
+        .icon {
+            font-size: 50px;
+            margin-bottom: 20px;
+            display: block;
+        }
+
+        h2 { font-size: 1.4rem; margin-bottom: 15px; color: #222; }
+        
+        .card p {
+            font-size: 0.95rem;
+            color: #666;
+            line-height: 1.5;
+            margin-bottom: 20px;
+        }
+
+        .btn {
+            background: #f8f9fa;
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-weight: bold;
+            color: #555;
+            transition: background 0.2s;
+            border: 1px solid #ddd;
+        }
+
+        .card:hover .btn {
+            background: #222;
+            color: white;
+            border-color: #222;
+        }
+
+        footer {
+            margin-top: auto;
+            text-align: center;
+            padding: 20px;
+            background: #333;
+            color: white;
+            font-size: 0.8rem;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>APOIO AO ON-SITE</h1>
+        <p class="subtitle">Acesse de forma rápida as principais ferramentas de gestão</p>
+    </header>
+
+    <div class="container">
+        
+        <a href="https://forms.office.com/Pages/ResponsePage.aspx?id=fCAtUtXsx0-nbxdGSxFh-eVAzhwdpsxLmCSGMQwqNIpUM1E2TFRSRkhNWU9IQk9SVFhBSDJNWTFDVS4u" target="_blank" class="card solicitacao">
+            <div>
+                <span class="icon">📝</span>
+                <h2>Central de Solicitações</h2>
+                <p>Plataforma para realizar e acompanhar suas solicitações internas de forma organizada.</p>
+            </div>
+            <div class="btn">Abrir Chamado</div>
+        </a>
+
+        <a href="https://forms.office.com/Pages/ResponsePage.aspx?id=fCAtUtXsx0-nbxdGSxFh-f7MDqf4DUBBuOHjox7sxytUNFFQNTgzR1pQV0FLM05aWElXSjlRMjFHRy4u&origin=Invitation&channel=0" target="_blank" class="card desligamento">
+            <div>
+                <span class="icon">🚫</span>
+                <h2>Desligamento Shopee</h2>
+                <p>Formulário oficial para iniciar o processo de desligamento de colaboradores.</p>
+            </div>
+            <div class="btn">Solicitar Desligamento</div>
+        </a>
+
+        <a href="https://www.appsheet.com/start/53559df4-e3c6-465a-86bc-1f3a70e6735a" target="_blank" class="card voucher">
+            <div>
+                <span class="icon">🚗</span>
+                <h2>Voucher Uber</h2>
+                <p>Informe aqui colaboradores desligados que utilizam o benefício do voucher.</p>
+            </div>
+            <div class="btn">Gerenciar Voucher</div>
+        </a>
+
+    </div>
+
+    <footer>
+        © 2026 Apoio ao On-Site - Todos os direitos reservados.
+    </footer>
+
+</body>
+</html>

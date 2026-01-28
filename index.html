@@ -3,127 +3,83 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portal On-Site | WeCanBR</title>
+    <title>Portal WeCanBR | Login</title>
     <style>
-        :root {
-            --primary: #6a11cb;
-            --secondary: #2575fc;
-            --dark: #333;
-            --danger: #ff4b2b;
-            --excel: #1e7e34;
-        }
-
+        :root { --primary: #6a11cb; --secondary: #2575fc; --dark: #333; --danger: #ff4b2b; }
+        body { font-family: 'Segoe UI', sans-serif; margin: 0; background: #f4f7f6; }
+        
         /* TELA DE LOGIN */
         #loginOverlay {
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background: linear-gradient(135deg, var(--primary), var(--secondary));
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            z-index: 9999;
+            display: flex; justify-content: center; align-items: center; z-index: 9999;
         }
-
         .login-box {
-            background: white;
-            padding: 40px;
-            border-radius: 15px;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.2);
-            text-align: center;
-            width: 320px;
+            background: white; padding: 40px; border-radius: 15px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.2); text-align: center; width: 320px;
         }
-
-        .login-box h2 { color: var(--primary); margin-bottom: 20px; font-family: sans-serif; }
-        
         .login-box input {
-            width: 100%;
-            padding: 12px;
-            margin: 10px 0;
-            border: 1px solid #ddd;
-            border-radius: 8px;
-            box-sizing: border-box;
-            outline: none;
+            width: 100%; padding: 12px; margin: 10px 0; border: 1px solid #ddd;
+            border-radius: 8px; box-sizing: border-box; outline: none;
         }
-
         .login-box button {
-            width: 100%;
-            padding: 12px;
-            background: var(--primary);
-            color: white;
-            border: none;
-            border-radius: 8px;
-            font-weight: bold;
-            cursor: pointer;
-            margin-top: 10px;
+            width: 100%; padding: 12px; background: var(--primary); color: white;
+            border: none; border-radius: 8px; font-weight: bold; cursor: pointer;
         }
+        .login-box button:disabled { background: #ccc; }
+        #loginError { color: var(--danger); font-size: 0.8rem; margin-top: 10px; display: none; }
 
-        .login-box button:disabled { background: #ccc; cursor: not-allowed; }
-
-        #loginError { color: var(--danger); font-size: 0.8rem; margin-top: 10px; display: none; font-family: sans-serif; }
-
-        /* ESTILO DO SITE (SÓ APARECE APÓS LOGIN) */
-        #mainContent { display: none; }
+        /* CONTEÚDO DO SITE (ESCONDIDO ATÉ LOGAR) */
+        #mainContent { display: none; padding-top: 80px; }
         body.logged-in #mainContent { display: block; }
         body.logged-in #loginOverlay { display: none; }
 
-        /* REUTILIZANDO SEU ESTILO ANTERIOR DA NAVBAR E CARDS */
-        body { font-family: 'Segoe UI', sans-serif; background-color: #f4f7f6; margin: 0; }
+        /* NAVBAR E ESTILOS */
         .navbar { background: white; height: 60px; display: flex; justify-content: space-between; align-items: center; padding: 0 30px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); position: fixed; top: 0; width: 100%; z-index: 1000; box-sizing: border-box; }
-        .nav-links { display: flex; align-items: center; height: 100%; }
-        .dropdown { position: relative; display: flex; align-items: center; height: 100%; }
-        .dropdown-btn, .nav-item { text-decoration: none; color: var(--dark); margin-left: 25px; font-weight: 600; font-size: 0.9rem; cursor: pointer; border: none; background: none; display: flex; align-items: center; gap: 5px; height: 100%; }
-        .dropdown-content { display: none; position: absolute; right: 0; background-color: white; min-width: 300px; box-shadow: 0px 8px 16px rgba(0,0,0,0.1); z-index: 1001; border-radius: 0 0 8px 8px; overflow: hidden; top: 60px; border-top: 2px solid var(--primary); }
-        .dropdown:hover .dropdown-content { display: block; }
-        .dropdown-content a { color: #333; padding: 12px 16px; text-decoration: none; display: block; font-size: 0.85rem; border-bottom: 1px solid #f0f0f0; }
-        header { background: linear-gradient(rgba(106, 17, 203, 0.75), rgba(37, 117, 252, 0.75)), url('https://wecanbr.com.br/wp-content/uploads/2021/08/bg-quem-somos.jpg'); background-size: cover; background-position: center; color: white; padding: 80px 20px; text-align: center; margin-top: 60px; }
-        .container { display: flex; justify-content: center; flex-wrap: wrap; gap: 25px; padding: 50px 20px; max-width: 1200px; margin: 0 auto; }
-        .card { background: white; border-radius: 15px; width: 300px; padding: 30px; text-align: center; box-shadow: 0 5px 15px rgba(0,0,0,0.05); transition: 0.3s; text-decoration: none; color: #333; border-top: 5px solid var(--primary); box-sizing: border-box; }
-        footer { text-align: center; padding: 30px; background: #222; color: white; margin-top: 50px; }
+        header { background: linear-gradient(rgba(106, 17, 203, 0.8), rgba(37, 117, 252, 0.8)), url('https://wecanbr.com.br/wp-content/uploads/2021/08/bg-quem-somos.jpg'); background-size: cover; color: white; padding: 60px 20px; text-align: center; }
+        .container { display: flex; justify-content: center; flex-wrap: wrap; gap: 20px; padding: 40px; }
+        .card { background: white; border-radius: 12px; width: 280px; padding: 25px; text-align: center; box-shadow: 0 4px 10px rgba(0,0,0,0.05); text-decoration: none; color: #333; border-top: 5px solid var(--primary); }
     </style>
 </head>
 <body>
 
     <div id="loginOverlay">
         <div class="login-box">
-            <img src="https://wecanbr.com.br/wp-content/uploads/2021/07/logo-wecan-br.png" width="150" alt="Logo"><br><br>
-            <h2>Portal de Apoio</h2>
+            <img src="https://wecanbr.com.br/wp-content/uploads/2021/07/logo-wecan-br.png" width="140"><br><br>
+            <h2 style="color:var(--primary)">Acesso ao Portal</h2>
             <input type="text" id="cpfInput" placeholder="CPF (apenas números)">
             <input type="password" id="passInput" placeholder="Senha">
             <button id="btnEntrar" onclick="verificarLogin()">Entrar</button>
-            <p id="loginError">Acesso negado. Verifique os dados.</p>
+            <p id="loginError">CPF ou Senha inválidos.</p>
         </div>
     </div>
 
     <div id="mainContent">
         <nav class="navbar">
             <div style="font-weight: bold; color: var(--primary)">WE CAN BR</div>
-            <div class="nav-links">
-                <a href="#" class="nav-item" onclick="logout()">🚪 Sair</a>
-            </div>
+            <a href="#" onclick="logout()" style="text-decoration:none; color:var(--danger); font-weight:bold">🚪 Sair</a>
         </nav>
 
         <header>
-            <h1>APOIO AO ONSITE</h1>
+            <h1>BEM-VINDO AO ONSITE</h1>
+            <p>Portal de ferramentas e documentos</p>
         </header>
 
         <div class="container">
             <div class="card">
-                <h2>Bem-vindo!</h2>
-                <p>Você está logado com segurança via Google Sheets.</p>
+                <h3>Login com Sucesso!</h3>
+                <p>Os seus dados foram validados via Google Sheets.</p>
             </div>
-        </div>
-
-        <footer>© 2026 WeCanBR</footer>
+            </div>
     </div>
 
     <script>
         // SEU LINK DO GOOGLE APPS SCRIPT
         const URL_API = "https://script.google.com/macros/s/AKfycbxkIdlDfuztedbbklTNIZPcpMxK23zViCAihPkFtsom18oLWEmdZmaW8DsvV-M0VxnBUA/exec";
 
-        window.onload = function() {
-            if(sessionStorage.getItem("logado") === "true") {
-                document.body.classList.add("logged-in");
-            }
+        // Verifica se já está logado na sessão atual
+        if(sessionStorage.getItem("acesso_liberado") === "true") {
+            document.body.classList.add("logged-in");
         }
 
         async function verificarLogin() {
@@ -135,11 +91,10 @@
             if(!cpf || !senha) return;
 
             btn.disabled = true;
-            btn.innerText = "Verificando...";
+            btn.innerText = "Validando...";
             erro.style.display = "none";
 
             try {
-                // Chama o seu motor do Google
                 const response = await fetch(URL_API, {
                     method: "POST",
                     body: JSON.stringify({ cpf: cpf, senha: senha })
@@ -148,7 +103,7 @@
                 const data = await response.json();
 
                 if (data.resultado === "OK") {
-                    sessionStorage.setItem("logado", "true");
+                    sessionStorage.setItem("acesso_liberado", "true");
                     document.body.classList.add("logged-in");
                 } else {
                     erro.style.display = "block";
@@ -156,14 +111,14 @@
                     btn.innerText = "Entrar";
                 }
             } catch (e) {
-                alert("Erro ao conectar com o servidor. Tente novamente.");
+                alert("Erro técnico. Verifique se a planilha está configurada.");
                 btn.disabled = false;
                 btn.innerText = "Entrar";
             }
         }
 
         function logout() {
-            sessionStorage.removeItem("logado");
+            sessionStorage.clear();
             location.reload();
         }
     </script>

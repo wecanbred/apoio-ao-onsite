@@ -12,80 +12,59 @@
             --danger: #ff4b2b;
         }
 
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #f4f7f6;
-            margin: 0;
-            padding-top: 60px;
-        }
+        body { font-family: 'Segoe UI', sans-serif; background-color: #f4f7f6; margin: 0; padding-top: 60px; }
 
-        /* BARRA DE NAVEGAÇÃO */
+        /* NAVBAR */
         .navbar {
             background: white; height: 60px; display: flex; justify-content: space-between;
             align-items: center; padding: 0 30px; box-shadow: 0 2px 10px rgba(0,0,0,0.1);
             position: fixed; top: 0; width: 100%; z-index: 1000; box-sizing: border-box;
         }
 
-        .dropdown { position: relative; height: 100%; display: flex; align-items: center; }
-        .dropdown-btn {
-            text-decoration: none; color: var(--dark); margin-left: 25px;
-            font-weight: 600; cursor: pointer; border: none; background: none;
-        }
+        .nav-right { display: flex; align-items: center; gap: 20px; }
+        .nav-item { text-decoration: none; color: var(--dark); font-weight: 600; font-size: 0.85rem; cursor: pointer; display: flex; align-items: center; gap: 5px; }
 
+        .dropdown { position: relative; }
         .dropdown-content {
             display: none; position: absolute; right: 0; background-color: white;
-            min-width: 250px; box-shadow: 0px 8px 16px rgba(0,0,0,0.1);
-            top: 60px; border-top: 2px solid var(--primary);
+            min-width: 250px; box-shadow: 0px 8px 16px rgba(0,0,0,0.1); top: 30px; border-top: 3px solid var(--primary);
         }
-
         .dropdown:hover .dropdown-content { display: block; }
-        .dropdown-content a { color: #333; padding: 12px; text-decoration: none; display: block; border-bottom: 1px solid #f0f0f0; }
+        .dropdown-content a { color: #333; padding: 12px; text-decoration: none; display: block; border-bottom: 1px solid #eee; font-size: 0.8rem; }
+        .dropdown-content a:hover { background: #f8f9fa; color: var(--primary); }
 
-        /* CABEÇALHO */
+        /* HEADER */
         header {
-            background: linear-gradient(rgba(106, 17, 203, 0.7), rgba(37, 117, 252, 0.7)), 
+            background: linear-gradient(rgba(106, 17, 203, 0.6), rgba(37, 117, 252, 0.6)), 
                         url('https://wecanbr.com.br/img/quem-somos/main.jpg');
-            background-size: cover; background-position: center;
-            color: white; padding: 80px 20px; text-align: center;
+            background-size: cover; background-position: center; color: white;
+            padding: 80px 20px; text-align: center;
         }
+
+        .search-container { margin-top: 20px; position: relative; width: 500px; max-width: 90%; margin-left: auto; margin-right: auto; }
+        #searchInput { padding: 15px 25px; width: 100%; border-radius: 30px; border: none; box-shadow: 0 5px 15px rgba(0,0,0,0.2); outline: none; box-sizing: border-box; }
 
         /* CARDS */
         .container { display: flex; justify-content: center; flex-wrap: wrap; gap: 20px; padding: 40px 20px; }
         .card {
             background: white; border-radius: 12px; width: 280px; padding: 25px;
             text-align: center; box-shadow: 0 5px 15px rgba(0,0,0,0.05);
-            text-decoration: none; color: #333; border-top: 5px solid var(--primary);
+            text-decoration: none; color: #333; border-top: 5px solid var(--primary); transition: 0.3s;
+        }
+        .card:hover { transform: translateY(-5px); }
+
+        /* SEÇÃO APPSHEET */
+        .app-access-box {
+            max-width: 900px; margin: 20px auto 60px; padding: 40px;
+            background: white; border-radius: 15px; text-align: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1); border: 1px solid #eee;
         }
 
-        /* PAINEL DE ACESSO AO APP (Substituindo o Iframe que dava erro) */
-        .app-login-section {
-            max-width: 800px;
-            margin: 20px auto 60px;
-            padding: 40px;
-            background: white;
-            border-radius: 15px;
-            text-align: center;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-            border: 1px solid #eee;
+        .btn-app {
+            display: inline-block; background: linear-gradient(45deg, var(--primary), var(--secondary));
+            color: white; padding: 16px 45px; text-decoration: none; border-radius: 35px;
+            font-weight: bold; margin-top: 20px; box-shadow: 0 4px 15px rgba(106, 17, 203, 0.3);
         }
-
-        .app-icon { font-size: 50px; margin-bottom: 20px; }
-        
-        .btn-login-app {
-            display: inline-block;
-            background: linear-gradient(45deg, var(--primary), var(--secondary));
-            color: white;
-            padding: 15px 40px;
-            text-decoration: none;
-            border-radius: 30px;
-            font-weight: bold;
-            font-size: 1.1rem;
-            margin-top: 20px;
-            transition: 0.3s;
-            box-shadow: 0 4px 15px rgba(106, 17, 203, 0.3);
-        }
-
-        .btn-login-app:hover { transform: scale(1.05); box-shadow: 0 6px 20px rgba(106, 17, 203, 0.4); }
 
         footer { text-align: center; padding: 25px; background: #222; color: white; }
     </style>
@@ -94,18 +73,38 @@
 
     <nav class="navbar">
         <div style="font-weight: bold; color: var(--primary);">WE CAN BR</div>
-        <div style="display: flex;">
+        <div class="nav-right">
             <div class="dropdown">
-                <button class="dropdown-btn">📊 Planilhas ▼</button>
+                <span class="nav-item">📊 Planilhas ▼</span>
                 <div class="dropdown-content">
-                    <a href="https://desafiorhcombr-my.sharepoint.com/:x:/r/personal/mirian_oliveira_wecanbr_com_br/_layouts/15/doc2.aspx?sourcedoc=%7B519706C2-BDEF-438C-B037-385F4D8A3488%7D&file=DRIVE%20DE%20RESCISAO%20SHOPEE.xlsx" target="_blank">Drive de Rescisão</a>
+                    <a href="https://desafiorhcombr-my.sharepoint.com/:x:/r/personal/mirian_oliveira_wecanbr_com_br/_layouts/15/doc2.aspx?sourcedoc=%7B519706C2-BDEF-438C-B037-385F4D8A3488%7D&file=DRIVE%20DE%20RESCISAO%20SHOPEE.xlsx" target="_blank">Drive de Rescisão Shopee</a>
+                    <a href="https://docs.google.com/spreadsheets/d/1WBYOF9AkoS7NpzhqFyqm5PzQRP13yUF2p5ZY8FfZp_c/edit#gid=690743947" target="_blank">Template Shopee</a>
                 </div>
             </div>
+            <div class="dropdown">
+                <span class="nav-item">📄 Documentos ▼</span>
+                <div class="dropdown-content">
+                    <a href="https://drive.google.com/file/d/1qsLtN-HC5488FVQc3n5mcT8zjCdVja0d/view" target="_blank">Carta de Suspensão</a>
+                    <a href="https://drive.google.com/file/d/1lGnjwLz_5i4uASifv2OPlkSb7NUGeaHI/view" target="_blank">Comunicado de Desligamento</a>
+                    <a href="https://drive.google.com/file/d/1zsrlh6KBLvMvEGc13tTA6I7Ybra5iObA/view" target="_blank">Advertência Disciplinar</a>
+                    <a href="https://drive.google.com/file/d/1_Dw1qLl9icW282pkZCNln8908Nfqiasi/view" target="_blank">Advertência - Ponto</a>
+                    <a href="https://drive.google.com/file/d/1aryngzuxX72mOhxchNmQPBA30QT2gNt2/view" target="_blank">Carta Banco Santander</a>
+                    <a href="https://drive.google.com/file/d/1PDp_bhtDB-ZR-wRwFUJ80Xpa4gWu_HkQ/view" target="_blank">Termo de Ciência - EPI</a>
+                    <a href="https://drive.google.com/file/d/1a_D1awqrBGXLaiKba6dc_ruE41dDF3ke/view" target="_blank">Dispensa Justa Causa</a>
+                    <a href="https://docs.google.com/document/d/1pqJ2b7wfCbjdAuKC99cIys9RYnenn2nkACDo33isZFE/edit" target="_blank">Aviso Prévio Indenizado</a>
+                    <a href="https://drive.google.com/file/d/16qsbtlkVBkIqZN_vjXK5T0gI7ivXWR/view" target="_blank">Declaração de Vínculo</a>
+                    <a href="https://drive.google.com/file/d/1CQQ3GTIUoOW9SGZ2EZTG8O3Q3ZFHk_El/view" target="_blank">DUT</a>
+                </div>
+            </div>
+            <a href="#" class="nav-item">🚗 Voucher Uber</a>
         </div>
     </nav>
 
     <header>
         <h1>APOIO AO ONSITE</h1>
+        <div class="search-container">
+            <input type="text" id="searchInput" placeholder="Pesquisar documentos ou planilhas...">
+        </div>
     </header>
 
     <div class="container">
@@ -113,16 +112,18 @@
             <h2>Central de Solicitações</h2>
             <p>Acesse o formulário de solicitações internas.</p>
         </a>
+        <a href="https://forms.office.com/Pages/ResponsePage.aspx?id=fCAtUtXsx0-nbxdGSxFh-f7MDqf4DUBBuOHjox7sxytUNFFQNTgzR1pQV0FLM05aWElXSjlRMjFHRy4u" target="_blank" class="card" style="border-top-color: var(--danger);">
+            <h2>Desligamento Shopee</h2>
+            <p>Formulário oficial de desligamento.</p>
+        </a>
     </div>
 
-    <div class="app-login-section">
-        <div class="app-icon">🔐</div>
-        <h2>Área Restrita - AppSheet</h2>
-        <p>Este aplicativo contém dados sensíveis e requer autenticação oficial.</p>
-        <p style="color: #666; font-size: 0.9rem;">Clique no botão abaixo para fazer login com sua conta Google e acessar o sistema.</p>
-        
-        <a href="https://www.appsheet.com/start/53559df4-e3c6-465a-86bc-1f3a70e6735a" target="_blank" class="btn-login-app">
-            EFETUAR LOGIN NO APP
+    <div class="app-access-box">
+        <div style="font-size: 40px;">📱</div>
+        <h2>VOUCHER 2026</h2>
+        <p>Acesse o sistema de gestão AppSheet com sua conta autorizada.</p>
+        <a href="https://www.appsheet.com/start/53559df4-e3c6-465a-86bc-1f3a70e6735a" target="_blank" class="btn-app">
+            ABRIR APLICATIVO
         </a>
     </div>
 

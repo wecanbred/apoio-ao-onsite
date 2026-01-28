@@ -36,11 +36,9 @@
 
         .nav-links { display: flex; align-items: center; height: 100%; }
 
-        /* ESTILO DO DROPDOWN CORRIGIDO */
         .dropdown { 
             position: relative; 
-            display: inline-block; 
-            height: 100%; /* Ocupa toda a altura da barra */
+            height: 100%;
             display: flex;
             align-items: center;
         }
@@ -57,7 +55,7 @@
             display: flex;
             align-items: center;
             gap: 5px;
-            height: 100%; /* Garante que o botão seja alto */
+            height: 100%;
         }
 
         .dropdown-content {
@@ -70,11 +68,10 @@
             z-index: 1001;
             border-radius: 0 0 8px 8px;
             overflow: hidden;
-            top: 60px; /* Alinhado exatamente com o fim da navbar */
+            top: 60px;
             border-top: 2px solid var(--primary);
         }
 
-        /* Essa é a "ponte" para o mouse não perder o foco */
         .dropdown:hover .dropdown-content { display: block; }
 
         .dropdown-content a {
@@ -90,10 +87,10 @@
         .dropdown-planilhas a:hover { background-color: #e6f4ea; color: var(--excel); border-left: 4px solid var(--excel); }
         .dropdown-docs a:hover { background-color: #f1f1f1; color: var(--primary); border-left: 4px solid var(--primary); }
 
-        /* CABEÇALHO */
+        /* CABEÇALHO COM A SUA IMAGEM E FILTRO */
         header {
             background: linear-gradient(rgba(106, 17, 203, 0.75), rgba(37, 117, 252, 0.75)), 
-                        url('https://wecanbr.com.br/wp-content/uploads/2021/08/bg-quem-somos.jpg');
+                        url('https://wecanbr.com.br/img/quem-somos/main.jpg');
             background-size: cover;
             background-position: center;
             color: white;
@@ -103,18 +100,44 @@
 
         header h1 { font-size: 2.5rem; text-transform: uppercase; letter-spacing: 2px; margin: 0; }
 
-        .search-container { margin-top: 25px; }
+        /* BUSCA E RESULTADOS */
+        .search-container { margin-top: 25px; position: relative; width: 400px; max-width: 85%; margin-left: auto; margin-right: auto; }
 
         #searchInput {
             padding: 15px 25px;
-            width: 400px;
-            max-width: 85%;
+            width: 100%;
             border-radius: 30px;
             border: none;
             font-size: 1rem;
             box-shadow: 0 5px 15px rgba(0,0,0,0.2);
             outline: none;
+            box-sizing: border-box;
         }
+
+        #searchResults {
+            position: absolute;
+            top: 55px;
+            left: 0;
+            width: 100%;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+            display: none;
+            z-index: 2000;
+            max-height: 300px;
+            overflow-y: auto;
+        }
+
+        .result-item {
+            display: block;
+            padding: 10px 20px;
+            color: #333;
+            text-decoration: none;
+            border-bottom: 1px solid #eee;
+            text-align: left;
+            font-size: 0.9rem;
+        }
+        .result-item:hover { background: #f0f0f0; color: var(--primary); }
 
         /* CARDS */
         .container {
@@ -190,7 +213,8 @@
     <header>
         <h1>APOIO AO ONSITE</h1>
         <div class="search-container">
-            <input type="text" id="searchInput" onkeyup="filtrarCards()" placeholder="O que você está procurando?">
+            <input type="text" id="searchInput" onkeyup="buscarTudo()" placeholder="Pesquisar em tudo..." autocomplete="off">
+            <div id="searchResults"></div>
         </div>
     </header>
 
@@ -217,19 +241,49 @@
     <footer>© 2026 Apoio ao On-Site | WeCanBR</footer>
 
     <script>
-        function filtrarCards() {
+        function buscarTudo() {
             let input = document.getElementById('searchInput').value.toLowerCase();
+            let resultsDiv = document.getElementById('searchResults');
             let cards = document.getElementsByClassName('card');
-            for (let i = 0; i < cards.length; i++) {
-                let titulo = cards[i].getElementsByTagName('h2')[0].innerText.toLowerCase();
-                let descricao = cards[i].getElementsByTagName('p')[0].innerText.toLowerCase();
-                if (titulo.includes(input) || descricao.includes(input)) {
-                    cards[i].classList.remove('hidden');
+            let dropdownLinks = document.querySelectorAll('.dropdown-content a');
+            
+            resultsDiv.innerHTML = "";
+            
+            if (input.length < 2) {
+                resultsDiv.style.display = "none";
+                for (let card of cards) card.classList.remove('hidden');
+                return;
+            }
+
+            let achouNoMenu = false;
+
+            // 1. Pesquisa nos links dos Dropdowns
+            dropdownLinks.forEach(link => {
+                if (link.innerText.toLowerCase().includes(input)) {
+                    achouNoMenu = true;
+                    resultsDiv.innerHTML += `<a href="${link.href}" target="_blank" class="result-item">🔗 ${link.innerText}</a>`;
+                }
+            });
+
+            // 2. Filtra os Cards na tela
+            for (let card of cards) {
+                let texto = card.innerText.toLowerCase();
+                if (texto.includes(input)) {
+                    card.classList.remove('hidden');
                 } else {
-                    cards[i].classList.add('hidden');
+                    card.classList.add('hidden');
                 }
             }
+
+            resultsDiv.style.display = achouNoMenu ? "block" : "none";
         }
+
+        // Fecha a lista de resultados ao clicar fora da busca
+        document.addEventListener('click', function(e) {
+            if (e.target.id !== 'searchInput') {
+                document.getElementById('searchResults').style.display = "none";
+            }
+        });
     </script>
 </body>
 </html>

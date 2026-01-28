@@ -46,8 +46,12 @@
             background: none;
         }
 
-        /* MENU SUSPENSO (DROPDOWN) */
-        .dropdown { position: relative; display: inline-block; }
+       /* MENU SUSPENSO AJUSTADO */
+        .dropdown { 
+            position: relative; 
+            display: inline-block; 
+            padding-bottom: 10px; /* Cria uma "ponte" invisível para o mouse */
+        }
 
         .dropdown-content {
             display: none;
@@ -59,7 +63,7 @@
             z-index: 1;
             border-radius: 8px;
             overflow: hidden;
-            margin-top: 10px;
+            top: 100%; /* Faz a lista começar exatamente onde termina o menu */
         }
 
         .dropdown-content a {
@@ -72,8 +76,15 @@
             border-bottom: 1px solid #eee;
         }
 
-        .dropdown-content a:hover { background-color: #f1f1f1; color: var(--primary); }
-        .dropdown:hover .dropdown-content { display: block; }
+        .dropdown-content a:hover { 
+            background-color: #f1f1f1; 
+            color: var(--primary); 
+        }
+
+        /* Mantém o menu aberto enquanto o mouse estiver sobre o botão OU sobre a lista */
+        .dropdown:hover .dropdown-content { 
+            display: block; 
+        }
 
         /* CABEÇALHO */
         header {

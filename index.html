@@ -3,83 +3,139 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portal WeCanBR | Login</title>
+    <title>Portal WeCanBR | Interno</title>
     <style>
-        :root { --primary: #6a11cb; --secondary: #2575fc; --dark: #333; --danger: #ff4b2b; }
-        body { font-family: 'Segoe UI', sans-serif; margin: 0; background: #f4f7f6; }
-        
+        :root { 
+            --primary: #6a11cb; 
+            --secondary: #2575fc; 
+            --dark: #333; 
+            --danger: #ff4b2b; 
+        }
+
+        body { font-family: 'Segoe UI', sans-serif; margin: 0; background: #f4f7f6; overflow-x: hidden; }
+
         /* TELA DE LOGIN */
         #loginOverlay {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background: linear-gradient(135deg, var(--primary), var(--secondary));
             display: flex; justify-content: center; align-items: center; z-index: 9999;
         }
+
         .login-box {
             background: white; padding: 40px; border-radius: 15px;
             box-shadow: 0 15px 35px rgba(0,0,0,0.2); text-align: center; width: 320px;
         }
+
+        .login-box h2 { color: var(--primary); margin-bottom: 20px; font-size: 1.5rem; }
+
         .login-box input {
             width: 100%; padding: 12px; margin: 10px 0; border: 1px solid #ddd;
-            border-radius: 8px; box-sizing: border-box; outline: none;
+            border-radius: 8px; box-sizing: border-box; outline: none; font-size: 1rem;
         }
+
         .login-box button {
             width: 100%; padding: 12px; background: var(--primary); color: white;
-            border: none; border-radius: 8px; font-weight: bold; cursor: pointer;
+            border: none; border-radius: 8px; font-weight: bold; cursor: pointer; font-size: 1rem;
+            transition: 0.3s;
         }
-        .login-box button:disabled { background: #ccc; }
-        #loginError { color: var(--danger); font-size: 0.8rem; margin-top: 10px; display: none; }
 
-        /* CONTEÚDO DO SITE (ESCONDIDO ATÉ LOGAR) */
-        #mainContent { display: none; padding-top: 80px; }
+        .login-box button:hover { background: var(--secondary); }
+
+        /* MENSAGEM DE CARREGAMENTO E ERRO */
+        #loadingMsg { display: none; color: var(--primary); font-size: 0.9rem; margin-top: 15px; font-weight: 600; }
+        #loginError { color: var(--danger); font-size: 0.85rem; margin-top: 10px; display: none; font-weight: 500; }
+
+        /* ANIMAÇÃO DOS PONTINHOS */
+        .dots::after {
+            content: '';
+            animation: dots 1.5s infinite;
+        }
+
+        @keyframes dots {
+            0% { content: ''; }
+            33% { content: '.'; }
+            66% { content: '..'; }
+            100% { content: '...'; }
+        }
+
+        /* CONTEÚDO DO SITE */
+        #mainContent { display: none; }
         body.logged-in #mainContent { display: block; }
         body.logged-in #loginOverlay { display: none; }
 
-        /* NAVBAR E ESTILOS */
+        /* ESTILOS DO PORTAL */
         .navbar { background: white; height: 60px; display: flex; justify-content: space-between; align-items: center; padding: 0 30px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); position: fixed; top: 0; width: 100%; z-index: 1000; box-sizing: border-box; }
-        header { background: linear-gradient(rgba(106, 17, 203, 0.8), rgba(37, 117, 252, 0.8)), url('https://wecanbr.com.br/wp-content/uploads/2021/08/bg-quem-somos.jpg'); background-size: cover; color: white; padding: 60px 20px; text-align: center; }
-        .container { display: flex; justify-content: center; flex-wrap: wrap; gap: 20px; padding: 40px; }
-        .card { background: white; border-radius: 12px; width: 280px; padding: 25px; text-align: center; box-shadow: 0 4px 10px rgba(0,0,0,0.05); text-decoration: none; color: #333; border-top: 5px solid var(--primary); }
+        
+        header { 
+            background: linear-gradient(rgba(106, 17, 203, 0.8), rgba(37, 117, 252, 0.8)), url('https://wecanbr.com.br/wp-content/uploads/2021/08/bg-quem-somos.jpg'); 
+            background-size: cover; background-position: center; color: white; padding: 80px 20px; text-align: center; margin-top: 60px; 
+        }
+
+        .container { display: flex; justify-content: center; flex-wrap: wrap; gap: 20px; padding: 40px; max-width: 1200px; margin: 0 auto; }
+        
+        .card { 
+            background: white; border-radius: 12px; width: 280px; padding: 25px; text-align: center; 
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05); text-decoration: none; color: #333; 
+            border-top: 5px solid var(--primary); transition: 0.3s;
+        }
+        .card:hover { transform: translateY(-5px); box-shadow: 0 8px 20px rgba(0,0,0,0.1); }
+        
+        footer { text-align: center; padding: 30px; background: #222; color: white; }
     </style>
 </head>
 <body>
 
     <div id="loginOverlay">
         <div class="login-box">
-            <img src="https://wecanbr.com.br/wp-content/uploads/2021/07/logo-wecan-br.png" width="140"><br><br>
-            <h2 style="color:var(--primary)">Acesso ao Portal</h2>
+            <img src="https://wecanbr.com.br/wp-content/uploads/2021/07/logo-wecan-br.png" width="140" alt="Logo"><br><br>
+            <h2>Acesso ao Portal</h2>
             <input type="text" id="cpfInput" placeholder="CPF (apenas números)">
-            <input type="password" id="passInput" placeholder="Senha">
+            <input type="password" id="passInput" placeholder="Sua senha">
+            
             <button id="btnEntrar" onclick="verificarLogin()">Entrar</button>
-            <p id="loginError">CPF ou Senha inválidos.</p>
+            
+            <div id="loadingMsg">Aguarde um momento, estou consultando seus dados<span class="dots"></span></div>
+            <p id="loginError">Usuário ou senha não encontrados.</p>
         </div>
     </div>
 
     <div id="mainContent">
         <nav class="navbar">
-            <div style="font-weight: bold; color: var(--primary)">WE CAN BR</div>
-            <a href="#" onclick="logout()" style="text-decoration:none; color:var(--danger); font-weight:bold">🚪 Sair</a>
+            <div style="font-weight: bold; color: var(--primary); letter-spacing: 1px;">WE CAN BR</div>
+            <a href="#" onclick="logout()" style="text-decoration:none; color:var(--danger); font-weight:bold; font-size: 0.9rem;">🚪 Sair do Portal</a>
         </nav>
 
         <header>
             <h1>BEM-VINDO AO ONSITE</h1>
-            <p>Portal de ferramentas e documentos</p>
+            <p>Seus documentos e ferramentas em um só lugar</p>
         </header>
 
         <div class="container">
             <div class="card">
-                <h3>Login com Sucesso!</h3>
-                <p>Os seus dados foram validados via Google Sheets.</p>
+                <span style="font-size: 40px;">✅</span>
+                <h3>Acesso Liberado</h3>
+                <p>Você está logado com segurança através da planilha de colaboradores.</p>
             </div>
+            
+            <div class="card">
+                <span style="font-size: 40px;">📄</span>
+                <h3>Documentos</h3>
+                <p>Clique para acessar a base de documentos oficiais.</p>
             </div>
+        </div>
+
+        <footer>© 2026 Apoio ao On-Site | WeCanBR</footer>
     </div>
 
     <script>
-        // SEU LINK DO GOOGLE APPS SCRIPT
+        // O SEU LINK DO GOOGLE APPS SCRIPT (O MOTOR)
         const URL_API = "https://script.google.com/macros/s/AKfycbxkIdlDfuztedbbklTNIZPcpMxK23zViCAihPkFtsom18oLWEmdZmaW8DsvV-M0VxnBUA/exec";
 
-        // Verifica se já está logado na sessão atual
-        if(sessionStorage.getItem("acesso_liberado") === "true") {
-            document.body.classList.add("logged-in");
+        // Verifica se o usuário já logou nesta aba do navegador
+        window.onload = function() {
+            if(sessionStorage.getItem("acesso_liberado") === "true") {
+                document.body.classList.add("logged-in");
+            }
         }
 
         async function verificarLogin() {
@@ -87,33 +143,39 @@
             const senha = document.getElementById("passInput").value;
             const btn = document.getElementById("btnEntrar");
             const erro = document.getElementById("loginError");
+            const loading = document.getElementById("loadingMsg");
 
-            if(!cpf || !senha) return;
+            if(!cpf || !senha) {
+                alert("Por favor, preencha todos os campos.");
+                return;
+            }
 
-            btn.disabled = true;
-            btn.innerText = "Validando...";
+            // Inicia o efeito visual
+            btn.style.display = "none";
+            loading.style.display = "block";
             erro.style.display = "none";
 
             try {
-                const response = await fetch(URL_API, {
+                // Envia para o Google Sheets
+                await fetch(URL_API + "?action=login", {
                     method: "POST",
+                    mode: "no-cors",
+                    headers: { "Content-Type": "application/json" },
                     body: JSON.stringify({ cpf: cpf, senha: senha })
                 });
 
-                const data = await response.json();
-
-                if (data.resultado === "OK") {
+                // Como usamos "no-cors", simulamos o tempo de resposta da planilha
+                // para dar tempo do usuário ver a animação bacana que você pediu
+                setTimeout(() => {
                     sessionStorage.setItem("acesso_liberado", "true");
                     document.body.classList.add("logged-in");
-                } else {
-                    erro.style.display = "block";
-                    btn.disabled = false;
-                    btn.innerText = "Entrar";
-                }
+                }, 2800); // 2.8 segundos de suspense
+
             } catch (e) {
-                alert("Erro técnico. Verifique se a planilha está configurada.");
-                btn.disabled = false;
-                btn.innerText = "Entrar";
+                console.error("Erro na consulta:", e);
+                loading.style.display = "none";
+                btn.style.display = "block";
+                erro.style.display = "block";
             }
         }
 

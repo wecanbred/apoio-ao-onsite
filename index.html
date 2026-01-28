@@ -36,12 +36,7 @@
 
         .nav-links { display: flex; align-items: center; height: 100%; }
 
-        .dropdown { 
-            position: relative; 
-            height: 100%; 
-            display: flex;
-            align-items: center;
-        }
+        .dropdown { position: relative; height: 100%; display: flex; align-items: center; }
 
         .dropdown-btn {
             text-decoration: none;
@@ -87,48 +82,43 @@
         .dropdown-planilhas a:hover { background-color: #e6f4ea; color: var(--excel); border-left: 4px solid var(--excel); }
         .dropdown-docs a:hover { background-color: #f1f1f1; color: var(--primary); border-left: 4px solid var(--primary); }
 
-        /* AJUSTE PARA CELULAR (CORREÇÃO DO MENU ESCONDIDO) */
-        @media (max-width: 768px) {
-            .navbar { padding: 0 15px; }
-            .dropdown-btn { margin-left: 10px; font-size: 0.8rem; }
-            
-            .dropdown-content {
-                position: fixed; /* Fixa em relação à tela do celular */
-                left: 5%;
-                right: 5%;
-                width: 90%;
-                min-width: unset;
-                top: 60px;
-                border-radius: 8px;
-            }
-            
-            header h1 { font-size: 1.8rem !important; }
-            #searchInput { width: 90% !important; }
-        }
-
-        /* CABEÇALHO */
+        /* CABEÇALHO COM A IMAGEM NOVA */
         header {
-            background: linear-gradient(rgba(106, 17, 203, 0.75), rgba(37, 117, 252, 0.75)), 
-                        url('https://wecanbr.com.br/wp-content/uploads/2021/08/bg-quem-somos.jpg');
+            /* Aqui está a mágica: imagem + um gradiente transparente por cima */
+            background: linear-gradient(rgba(106, 17, 203, 0.7), rgba(37, 117, 252, 0.7)), 
+                        url('https://wecanbr.com.br/img/quem-somos/main.jpg');
             background-size: cover;
             background-position: center;
             color: white;
-            padding: 80px 20px;
+            padding: 100px 20px;
             text-align: center;
         }
 
-        header h1 { font-size: 2.5rem; text-transform: uppercase; letter-spacing: 2px; margin: 0; }
+        header h1 { font-size: 2.5rem; text-transform: uppercase; letter-spacing: 2px; margin: 0; text-shadow: 2px 2px 4px rgba(0,0,0,0.3); }
+
         .search-container { margin-top: 25px; }
 
         #searchInput {
             padding: 15px 25px;
-            width: 400px;
+            width: 450px;
             max-width: 85%;
             border-radius: 30px;
             border: none;
             font-size: 1rem;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
             outline: none;
+        }
+
+        /* AJUSTES PARA CELULAR */
+        @media (max-width: 768px) {
+            .navbar { padding: 0 15px; }
+            .dropdown-btn { margin-left: 10px; font-size: 0.8rem; }
+            .dropdown-content {
+                position: fixed; left: 5%; right: 5%; width: 90%;
+                min-width: unset; top: 60px; border-radius: 8px;
+            }
+            header h1 { font-size: 1.8rem; }
+            header { padding: 60px 20px; }
         }
 
         /* CARDS */
@@ -151,7 +141,7 @@
             box-shadow: 0 5px 15px rgba(0,0,0,0.05);
             transition: 0.3s;
             text-decoration: none;
-            color: #333;
+            color: #dark;
             border-top: 5px solid var(--primary);
             box-sizing: border-box;
         }
@@ -159,8 +149,8 @@
         .card:hover { transform: translateY(-5px); box-shadow: 0 10px 25px rgba(0,0,0,0.1); }
         .card.hidden { display: none; }
         .icon { font-size: 45px; margin-bottom: 15px; display: block; }
-        h2 { font-size: 1.2rem; margin: 10px 0; }
-        p { font-size: 0.9rem; color: #666; line-height: 1.5; }
+        h2 { font-size: 1.1rem; margin: 10px 0; }
+        p { font-size: 0.85rem; color: #666; line-height: 1.5; }
 
         footer { text-align: center; padding: 30px; background: #222; color: white; margin-top: 50px; }
     </style>
@@ -170,7 +160,6 @@
     <nav class="navbar">
         <div style="font-weight: bold; color: var(--primary); letter-spacing: 1px;">WE CAN BR</div>
         <div class="nav-links">
-            
             <div class="dropdown">
                 <button class="dropdown-btn">📊 Planilhas ▼</button>
                 <div class="dropdown-content dropdown-planilhas">
@@ -189,11 +178,6 @@
                     <a href="https://drive.google.com/file/d/1zsrlh6KBLvMvEGc13tTA6I7Ybra5iObA/view" target="_blank">Advertência Disciplinar</a>
                     <a href="https://drive.google.com/file/d/1_Dw1qLl9icW282pkZCNln8908Nfqiasi/view" target="_blank">Advertência - Ponto</a>
                     <a href="https://drive.google.com/file/d/1aryngzuxX72mOhxchNmQPBA30QT2gNt2/view" target="_blank">Carta Banco Santander</a>
-                    <a href="https://drive.google.com/file/d/1PDp_bhtDB-ZR-wRwFUJ80Xpa4gWu_HkQ/view" target="_blank">Termo de Ciência - EPI</a>
-                    <a href="https://drive.google.com/file/d/1a_D1awqrBGXLaiKba6dc_ruE41dDF3ke/view" target="_blank">Dispensa Justa Causa</a>
-                    <a href="https://docs.google.com/document/d/1pqJ2b7wfCbjdAuKC99cIys9RYnenn2nkACDo33isZFE/edit" target="_blank">Aviso Prévio Indenizado</a>
-                    <a href="https://drive.google.com/file/d/16qsbtlkVBkIqZN_vjXK5T0gOEI7ivXWR/view" target="_blank">Declaração de Vínculo</a>
-                    <a href="https://drive.google.com/file/d/1CQQ3GTIUoOW9SGZ2EZTG8O3Q3ZFHk_El/view" target="_blank">DUT</a>
                 </div>
             </div>
 

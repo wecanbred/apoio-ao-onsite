@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Meu Primeiro Site</title>
+    <style>
+        body { font-family: sans-serif; text-align: center; padding: 50px; background-color: #f0f8ff; }
+        button { padding: 15px 25px; font-size: 18px; cursor: pointer; background: #28a745; color: white; border: none; border-radius: 5px; }
+        #mensagem { margin-top: 20px; font-size: 24px; color: #333; font-weight: bold; }
+    </style>
+</head>
+<body>
+
+    <h1>Olá, Mundo! 🚀</h1>
+    <p>Clique no botão para receber uma dose de energia:</p>
+    
+    <button onclick="gerarElogio()">Me surpreenda!</button>
+    
+    <div id="mensagem"></div>
+
+    <script>
+        function gerarElogio() {
+            // Esta é a lista de frases que o JavaScript vai usar
+            const elogios = [
+                "Você tem um raciocínio incrível!",
+                "Sua determinação em aprender programação é inspiradora.",
+                "O mundo precisa de mais mentes criativas como a sua!",
+                "Você está mandando muito bem no GitHub!",
+                "Hoje é um dia perfeito para codar algo novo!"
+            ];
+
+            // Aqui o código sorteia uma frase da lista
+            const sorteio = Math.floor(Math.random() * elogios.length);
+            
+            // Aqui o código coloca a frase na tela
+            document.getElementById("mensagem").innerText = elogios[sorteio];
+        }
+    </script>
+
+</body>
+</html>

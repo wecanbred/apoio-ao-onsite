@@ -9,6 +9,7 @@
             --primary: #6a11cb;
             --secondary: #2575fc;
             --dark: #333;
+            --danger: #ff4b2b;
         }
 
         body {
@@ -38,77 +39,90 @@
             margin-left: 20px;
             font-weight: 600;
             font-size: 0.9rem;
-            transition: color 0.3s;
+            transition: 0.3s;
         }
 
         .nav-links a:hover { color: var(--primary); }
 
-        /* CABEÇALHO COM IMAGEM E TRANSPARÊNCIA */
+        /* CABEÇALHO */
         header {
             background: linear-gradient(rgba(106, 17, 203, 0.75), rgba(37, 117, 252, 0.75)), 
                         url('https://wecanbr.com.br/wp-content/uploads/2021/08/bg-quem-somos.jpg');
             background-size: cover;
             background-position: center;
             color: white;
-            padding: 100px 20px;
+            padding: 80px 20px;
             text-align: center;
-            border-bottom: 4px solid var(--primary);
         }
 
-        header h1 {
-            font-size: 3rem;
-            text-transform: uppercase;
-            letter-spacing: 3px;
-            margin: 0;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
-        }
+        header h1 { font-size: 2.5rem; text-transform: uppercase; letter-spacing: 2px; margin: 0; }
 
-        .search-container { margin-top: 30px; }
+        .search-container { margin-top: 25px; }
 
         #searchInput {
             padding: 15px 25px;
             width: 400px;
-            max-width: 80%;
+            max-width: 85%;
             border-radius: 30px;
             border: none;
             font-size: 1rem;
-            outline: none;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.3);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
         }
 
-        /* CONTAINER E CARDS */
+        /* SEÇÕES */
+        .section-title {
+            text-align: center;
+            margin-top: 40px;
+            color: var(--dark);
+            font-size: 1.5rem;
+            text-transform: uppercase;
+        }
+
         .container {
             display: flex;
             justify-content: center;
             flex-wrap: wrap;
-            gap: 25px;
-            padding: 50px 20px;
+            gap: 20px;
+            padding: 20px;
             max-width: 1200px;
             margin: 0 auto;
         }
 
+        /* ESTILO DOS CARDS E LINKS */
         .card {
             background: white;
-            border-radius: 15px;
-            width: 280px;
-            padding: 25px;
+            border-radius: 12px;
+            width: 260px;
+            padding: 20px;
             text-align: center;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
             transition: 0.3s;
             text-decoration: none;
             color: #333;
-            border-top: 5px solid var(--primary);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
+            border-top: 4px solid var(--primary);
         }
 
-        .card:hover { transform: translateY(-5px); box-shadow: 0 10px 25px rgba(0,0,0,0.1); }
-        .card.hidden { display: none; }
+        .card:hover { transform: translateY(-5px); box-shadow: 0 8px 15px rgba(0,0,0,0.1); }
+        
+        .doc-link {
+            background: white;
+            border-radius: 8px;
+            width: 100%;
+            max-width: 500px;
+            padding: 15px;
+            margin: 5px;
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+            color: #444;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            transition: 0.2s;
+            border-left: 4px solid var(--secondary);
+        }
 
-        .icon { font-size: 45px; margin-bottom: 15px; }
-        h2 { font-size: 1.2rem; margin: 10px 0; color: #222; }
-        p { font-size: 0.9rem; color: #666; line-height: 1.4; }
+        .doc-link:hover { background: #edf2ff; transform: scale(1.02); }
+
+        .hidden { display: none !important; }
 
         footer { text-align: center; padding: 30px; background: #222; color: white; margin-top: 50px; }
     </style>
@@ -116,10 +130,9 @@
 <body>
 
     <nav class="navbar">
-        <div style="font-weight: bold; color: var(--primary); letter-spacing: 1px;">WE CAN BR</div>
+        <div style="font-weight: bold; color: var(--primary)">WE CAN BR</div>
         <div class="nav-links">
-            <a href="#" title="Link para Planilhas">📊 Planilhas</a>
-            <a href="#" title="Link para Documentos">📄 Arquivos</a>
+            <a href="#">📊 Planilhas</a>
             <a href="https://www.appsheet.com/start/53559df4-e3c6-465a-86bc-1f3a70e6735a" target="_blank">🚗 Voucher Uber</a>
         </div>
     </nav>
@@ -127,47 +140,51 @@
     <header>
         <h1>APOIO AO ONSITE</h1>
         <div class="search-container">
-            <input type="text" id="searchInput" onkeyup="filtrarCards()" placeholder="O que você precisa hoje?">
+            <input type="text" id="searchInput" onkeyup="filtrarTudo()" placeholder="Pesquisar documentos ou serviços...">
         </div>
     </header>
 
-    <div class="container" id="cardContainer">
-        <a href="https://forms.office.com/Pages/ResponsePage.aspx?id=fCAtUtXsx0-nbxdGSxFh-eVAzhwdpsxLmCSGMQwqNIpUM1E2TFRSRkhNWU9IQk9SVFhBSDJNWTFDVS4u" target="_blank" class="card">
-            <span class="icon">📝</span>
-            <h2>Central de Solicitações</h2>
-            <p>Clique aqui para realizar e acompanhar suas solicitações internas.</p>
+    <h2 class="section-title">Serviços e Formulários</h2>
+    <div class="container" id="servicosContainer">
+        <a href="https://forms.office.com/..." target="_blank" class="card">
+            <span>📝</span> <h2>Central de Solicitações</h2>
         </a>
-
-        <a href="https://forms.office.com/Pages/ResponsePage.aspx?id=fCAtUtXsx0-nbxdGSxFh-f7MDqf4DUBBuOHjox7sxytUNFFQNTgzR1pQV0FLM05aWElXSjlRMjFHRy4u&origin=Invitation&channel=0" target="_blank" class="card" style="border-top-color: #ff4b2b;">
-            <span class="icon">🚫</span>
-            <h2>Desligamento Shopee</h2>
-            <p>Formulário oficial para início do processo de desligamento.</p>
+        <a href="https://forms.office.com/..." target="_blank" class="card" style="border-top-color: var(--danger);">
+            <span>🚫</span> <h2>Desligamento Shopee</h2>
         </a>
-
-        <a href="https://www.appsheet.com/start/53559df4-e3c6-465a-86bc-1f3a70e6735a" target="_blank" class="card" style="border-top-color: #2575fc;">
-            <span class="icon">🚗</span>
-            <h2>Voucher Uber</h2>
-            <p>Portal para informar desligados que utilizam o benefício Uber.</p>
+        <a href="https://www.appsheet.com/..." target="_blank" class="card" style="border-top-color: var(--secondary);">
+            <span>🚗</span> <h2>Voucher Uber</h2>
         </a>
     </div>
 
-    <footer>© 2026 Apoio ao On-Site | WeCanBR - Interno</footer>
+    <h2 class="section-title">Documentos e Modelos</h2>
+    <div class="container" id="docsContainer" style="flex-direction: column; align-items: center;">
+        
+        <a href="https://drive.google.com/file/d/1qsLtN-HC5488FVQc3n5mcT8zjCdVja0d/view" target="_blank" class="doc-link">📄 Carta de Suspensão</a>
+        <a href="https://drive.google.com/file/d/1lGnjwLz_5i4uASifv2OPlkSb7NUGeaHI/view" target="_blank" class="doc-link">📄 Comunicado de Desligamento</a>
+        <a href="https://drive.google.com/file/d/1zsrlh6KBLvMvEGc13tTA6I7Ybra5iObA/view" target="_blank" class="doc-link">📄 Advertência Disciplinar</a>
+        <a href="https://drive.google.com/file/d/1_Dw1qLl9icW282pkZCNln8908Nfqiasi/view" target="_blank" class="doc-link">📄 Advertência - Marcação de Ponto</a>
+        <a href="https://drive.google.com/file/d/1aryngzuxX72mOhxchNmQPBA30QT2gNt2/view" target="_blank" class="doc-link">📄 Carta Banco Santander</a>
+        <a href="https://drive.google.com/file/d/1PDp_bhtDB-ZR-wRwFUJ80Xpa4gWu_HkQ/view" target="_blank" class="doc-link">📄 Termo de Ciência - EPI</a>
+        <a href="https://drive.google.com/file/d/1a_D1awqrBGXLaiKba6dc_ruE41dDF3ke/view" target="_blank" class="doc-link">📄 Dispensa por Justa Causa</a>
+        <a href="https://docs.google.com/document/d/1pqJ2b7wfCbjdAuKC99cIys9RYnenn2nkACDo33isZFE/edit" target="_blank" class="doc-link">📄 Aviso Prévio Indenizado</a>
+        <a href="https://drive.google.com/file/d/16qsbtlkVBkIqZN_vjXK5T0gOEI7ivXWR/view" target="_blank" class="doc-link">📄 Declaração de Vínculo</a>
+        <a href="https://drive.google.com/file/d/1CQQ3GTIUoOW9SGZ2EZTG8O3Q3ZFHk_El/view" target="_blank" class="doc-link">📄 DUT</a>
+
+    </div>
+
+    <footer>© 2026 Apoio ao On-Site | WeCanBR</footer>
 
     <script>
-        function filtrarCards() {
+        function filtrarTudo() {
             let input = document.getElementById('searchInput').value.toLowerCase();
-            let cards = document.getElementsByClassName('card');
-            for (let i = 0; i < cards.length; i++) {
-                let titulo = cards[i].getElementsByTagName('h2')[0].innerText.toLowerCase();
-                let descricao = cards[i].getElementsByTagName('p')[0].innerText.toLowerCase();
-                if (titulo.includes(input) || descricao.includes(input)) {
-                    cards[i].classList.remove('hidden');
-                } else {
-                    cards[i].classList.add('hidden');
-                }
-            }
+            let items = document.querySelectorAll('.card, .doc-link');
+            
+            items.forEach(item => {
+                let text = item.innerText.toLowerCase();
+                item.classList.toggle('hidden', !text.includes(input));
+            });
         }
     </script>
-
 </body>
 </html>

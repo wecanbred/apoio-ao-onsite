@@ -15,7 +15,7 @@
             --navbar-bg: white;
             --danger: #ff4b2b;
             --excel: #1e7e34;
-            --signature-color: #999;
+            --signature-color: #666; /* Cor discreta no modo claro */
         }
 
         [data-theme="dark"] {
@@ -23,7 +23,7 @@
             --card-bg: #1e1e1e;
             --text: #e0e0e0;
             --navbar-bg: #1e1e1e;
-            --signature-color: #555;
+            --signature-color: #888; /* Visível no fundo escuro */
         }
 
         body {
@@ -50,7 +50,6 @@
         }
 
         .nav-links { display: flex; align-items: center; height: 100%; }
-
         .dropdown { position: relative; display: flex; align-items: center; height: 100%; }
 
         .dropdown-btn {
@@ -136,15 +135,15 @@
         .sheet-container { width: 100%; height: 600px; border-radius: 10px; border: 1px solid #ddd; overflow: hidden; }
         iframe { width: 100%; height: 100%; border: none; }
 
-        /* ASSINATURA */
+        /* ASSINATURA CENTRALIZADA */
         .signature {
-            text-align: right;
-            padding-right: 3%;
-            margin-bottom: 5px;
+            text-align: center;
+            margin-top: 20px;
+            margin-bottom: 10px;
             font-family: 'Great Vibes', cursive;
-            font-size: 1.2rem;
+            font-size: 1.3rem;
             color: var(--signature-color);
-            opacity: 0.7;
+            transition: 0.3s;
         }
 
         /* BOTÃO TEMA */
@@ -167,27 +166,18 @@
         <div class="nav-links">
             <div class="dropdown">
                 <button class="dropdown-btn">📊 Planilhas ▼</button>
-                <div class="dropdown-content dropdown-planilhas">
+                <div class="dropdown-content">
                     <a href="https://desafiorhcombr-my.sharepoint.com/:x:/r/personal/mirian_oliveira_wecanbr_com_br/_layouts/15/doc2.aspx?sourcedoc=%7B519706C2-BDEF-438C-B037-385F4D8A3488%7D&file=DRIVE%20DE%20RESCISAO%20SHOPEE.xlsx" target="_blank">📈 Drive de Rescisão Shopee</a>
                     <a href="https://desafiorhcombr-my.sharepoint.com/:x:/r/personal/edivan_costa_wecanbr_com_br/_layouts/15/Doc.aspx?sourcedoc=%7B63D04DA0-C7A8-4059-8591-37DFCED94A93%7D&file=CENTRAL%20DE%20SOLICITA%25u00c7%25u00d5ES.xlsx" target="_blank">📋 Central de Solicitações (Base)</a>
-                    <a href="https://docs.google.com/spreadsheets/d/1WBYOF9AkoS7NpzhqFyqm5PzQRP13yUF2p5ZY8FfZp_c/edit#gid=690743947" target="_blank">🔍 Template Shopee</a>
-                    <a href="https://desafiorhcombr.sharepoint.com/:x:/r/sites/FSWECANBR/_layouts/15/Doc.aspx?sourcedoc=%7B1BA76351-0EC5-4118-9F32-E921659CCCE1%7D&file=01%202026%20REJEITOS%20JANEIRO%20.xlsx" target="_blank">⚠️ Rejeitos 01.2026</a>
                 </div>
             </div>
 
             <div class="dropdown">
                 <button class="dropdown-btn">📄 Documentos ▼</button>
-                <div class="dropdown-content dropdown-docs">
+                <div class="dropdown-content">
                     <a href="https://drive.google.com/file/d/1qsLtN-HC5488FVQc3n5mcT8zjCdVja0d/view" target="_blank">Carta de Suspensão</a>
-                    <a href="https://drive.google.com/file/d/1lGnjwLz_5i4uASifv2OPlkSb7NUGeaHI/view" target="_blank">Comunicado de Desligamento</a>
-                    <a href="https://drive.google.com/file/d/1zsrlh6KBLvMvEGc13tTA6I7Ybra5iObA/view" target="_blank">Advertência Disciplinar</a>
-                    <a href="https://drive.google.com/file/d/1_Dw1qLl9icW282pkZCNln8908Nfqiasi/view" target="_blank">Advertência - Ponto</a>
-                    <a href="https://drive.google.com/file/d/1aryngzuxX72mOhxchNmQPBA30QT2gNt2/view" target="_blank">Carta Banco Santander</a>
-                    <a href="https://drive.google.com/file/d/1PDp_bhtDB-ZR-wRwFUJ80Xpa4gWu_HkQ/view" target="_blank">Termo de Ciência - EPI</a>
                     <a href="https://drive.google.com/file/d/1a_D1awqrBGXLaiKba6dc_ruE41dDF3ke/view" target="_blank">Dispensa Justa Causa</a>
-                    <a href="https://docs.google.com/document/d/1pqJ2b7wfCbjdAuKC99cIys9RYnenn2nkACDo33isZFE/edit" target="_blank">Aviso Prévio Indenizado</a>
                     <a href="https://drive.google.com/file/d/16qsbtlkVBkIqZN_vjXK5T0gOEI7ivXWR/view" target="_blank">Declaração de Vínculo</a>
-                    <a href="https://drive.google.com/file/d/1CQQ3GTIUoOW9SGZ2EZTG8O3Q3ZFHk_El/view" target="_blank">DUT</a>
                 </div>
             </div>
 
@@ -198,28 +188,22 @@
     <header>
         <h1>APOIO AO ONSITE</h1>
         <div class="search-container">
-            <input type="text" id="searchInput" onkeyup="buscarTudo()" placeholder="Pesquisar em tudo..." autocomplete="off">
+            <input type="text" id="searchInput" onkeyup="buscarTudo()" placeholder="Pesquisar..." autocomplete="off">
             <div id="searchResults"></div>
         </div>
     </header>
 
     <div class="container" id="cardContainer">
         <a href="https://forms.office.com/Pages/ResponsePage.aspx?id=fCAtUtXsx0-nbxdGSxFh-eVAzhwdpsxLmCSGMQwqNIpUM1E2TFRSRkhNWU9IQk9SVFhBSDJNWTFDVS4u" target="_blank" class="card">
-            <span class="icon">📝</span>
+            <span style="font-size:45px">📝</span>
             <h2>Central de Solicitações</h2>
-            <p>Plataforma para realizar e acompanhar suas solicitações internas.</p>
+            <p>Acesse o formulário de solicitações internas.</p>
         </a>
 
         <a href="https://forms.office.com/Pages/ResponsePage.aspx?id=fCAtUtXsx0-nbxdGSxFh-f7MDqf4DUBBuOHjox7sxytUNFFQNTgzR1pQV0FLM05aWElXSjlRMjFHRy4u" target="_blank" class="card" style="border-top-color: var(--danger);">
-            <span class="icon">🚫</span>
+            <span style="font-size:45px">🚫</span>
             <h2>Desligamento Shopee</h2>
-            <p>Formulário oficial para processo de desligamento.</p>
-        </a>
-
-        <a href="https://www.appsheet.com/start/53559df4-e3c6-465a-86bc-1f3a70e6735a" target="_blank" class="card" style="border-top-color: var(--secondary);">
-            <span class="icon">🚗</span>
-            <h2>Voucher Uber</h2>
-            <p>Informe aqui colaboradores desligados que utilizam o benefício.</p>
+            <p>Formulário oficial para desligamento.</p>
         </a>
     </div>
 
@@ -251,27 +235,15 @@
             let input = document.getElementById('searchInput').value.toLowerCase();
             let resultsDiv = document.getElementById('searchResults');
             let cards = document.getElementsByClassName('card');
-            let dropdownLinks = document.querySelectorAll('.dropdown-content a');
-            
             resultsDiv.innerHTML = "";
             if (input.length < 2) {
                 resultsDiv.style.display = "none";
                 for (let card of cards) card.classList.remove('hidden');
                 return;
             }
-
-            let achouNoMenu = false;
-            dropdownLinks.forEach(link => {
-                if (link.innerText.toLowerCase().includes(input)) {
-                    achouNoMenu = true;
-                    resultsDiv.innerHTML += `<a href="${link.href}" target="_blank" class="result-item">🔗 ${link.innerText}</a>`;
-                }
-            });
-
             for (let card of cards) {
                 card.classList.toggle('hidden', !card.innerText.toLowerCase().includes(input));
             }
-            resultsDiv.style.display = achouNoMenu ? "block" : "none";
         }
     </script>
 </body>

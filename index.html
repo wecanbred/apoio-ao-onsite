@@ -23,7 +23,7 @@
             --card-bg: #1e1e1e;
             --text: #e0e0e0;
             --navbar-bg: #1e1e1e;
-            --signature: rgba(255, 255, 255, 0.1); /* Bem escurinho no modo escuro */
+            --signature: rgba(255, 255, 255, 0.05); /* Bem escurinho no modo escuro */
         }
 
         body {
@@ -52,7 +52,7 @@
         .nav-links { display: flex; align-items: center; height: 100%; }
         .dropdown { position: relative; display: flex; align-items: center; height: 100%; }
 
-        .dropdown-btn {
+        .dropdown-btn, .nav-item {
             text-decoration: none;
             color: var(--text);
             margin-left: 25px;
@@ -167,6 +167,8 @@
     <nav class="navbar">
         <div style="font-weight: bold; color: var(--primary); letter-spacing: 1px;">WE CAN BR</div>
         <div class="nav-links">
+            <a href="https://script.google.com/macros/s/AKfycbz_oLTclTRNpccyAO1HnpINJqsUKDULMD_D03b404uPXHE2PCMVh7ta1XLOgP_MnEFFwg/exec" target="_blank" class="nav-item">📋 Cadastro Voucher</a>
+
             <div class="dropdown">
                 <button class="dropdown-btn">📊 Planilhas ▼</button>
                 <div class="dropdown-content">

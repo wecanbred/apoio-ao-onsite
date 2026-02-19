@@ -129,6 +129,39 @@
         .card.hidden { display: none; }
         .icon { font-size: 45px; margin-bottom: 15px; display: block; }
 
+        /* MODAL DO FORMULÁRIO */
+        .modal {
+            display: none; position: fixed; z-index: 3000; left: 0; top: 0;
+            width: 100%; height: 100%; background-color: rgba(0,0,0,0.6);
+            backdrop-filter: blur(5px);
+        }
+        .modal-content {
+            background-color: var(--card-bg); margin: 5% auto; padding: 30px;
+            border-radius: 15px; width: 90%; max-width: 600px;
+            box-shadow: 0 5px 30px rgba(0,0,0,0.3); position: relative;
+        }
+        .close-modal {
+            position: absolute; right: 20px; top: 15px; font-size: 28px;
+            cursor: pointer; color: var(--text);
+        }
+
+        .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-top: 20px; }
+        .full-width { grid-column: span 2; }
+        .form-group label { display: block; font-size: 11px; font-weight: bold; margin-bottom: 5px; color: #888; text-transform: uppercase; }
+        .form-group input { 
+            width: 100%; padding: 12px; border-radius: 8px; border: 1px solid #ddd; 
+            box-sizing: border-box; background: var(--bg); color: var(--text);
+        }
+        .btn-submit {
+            grid-column: span 2; background: var(--primary); color: white; padding: 15px;
+            border: none; border-radius: 8px; font-weight: bold; cursor: pointer; margin-top: 10px;
+        }
+        .btn-submit:disabled { background: #ccc; }
+        #statusMsg { 
+            grid-column: span 2; text-align: center; padding: 10px; border-radius: 8px; 
+            display: none; font-weight: bold; margin-top: 10px;
+        }
+
         .sheet-section {
             max-width: 95%; margin: 20px auto 10px;
             background: var(--card-bg); padding: 10px; border-radius: 15px;
@@ -151,40 +184,6 @@
         }
 
         footer { text-align: center; padding: 30px; background: #222; color: white; }
-
-        /* MODAL DO FORMULÁRIO */
-        .modal {
-            display: none; position: fixed; z-index: 3000; left: 0; top: 0;
-            width: 100%; height: 100%; background-color: rgba(0,0,0,0.6);
-            backdrop-filter: blur(5px);
-        }
-        .modal-content {
-            background-color: var(--card-bg); margin: 5% auto; padding: 30px;
-            border-radius: 15px; width: 90%; max-width: 600px;
-            box-shadow: 0 5px 30px rgba(0,0,0,0.3); position: relative;
-        }
-        .close-modal {
-            position: absolute; right: 20px; top: 15px; font-size: 28px;
-            cursor: pointer; color: var(--text);
-        }
-
-        /* ESTILO INTERNO DO FORMULÁRIO */
-        .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-top: 20px; }
-        .full-width { grid-column: span 2; }
-        .form-group label { display: block; font-size: 11px; font-weight: bold; margin-bottom: 5px; color: #888; text-transform: uppercase; }
-        .form-group input { 
-            width: 100%; padding: 12px; border-radius: 8px; border: 1px solid #ddd; 
-            box-sizing: border-box; background: var(--bg); color: var(--text);
-        }
-        .btn-submit {
-            grid-column: span 2; background: var(--primary); color: white; padding: 15px;
-            border: none; border-radius: 8px; font-weight: bold; cursor: pointer; margin-top: 10px;
-        }
-        .btn-submit:disabled { background: #ccc; }
-        #statusMsg { 
-            grid-column: span 2; text-align: center; padding: 10px; border-radius: 8px; 
-            display: none; font-weight: bold; margin-top: 10px;
-        }
     </style>
 </head>
 <body>
@@ -195,11 +194,30 @@
         <div style="font-weight: bold; color: var(--primary); letter-spacing: 1px;">WE CAN BR</div>
         <div class="nav-links">
             <button onclick="openModal()" class="nav-item">📋 Cadastro Voucher</button>
+
             <div class="dropdown">
                 <button class="dropdown-btn">📊 Planilhas ▼</button>
                 <div class="dropdown-content">
                     <a href="https://desafiorhcombr-my.sharepoint.com/:x:/r/personal/mirian_oliveira_wecanbr_com_br/_layouts/15/doc2.aspx?sourcedoc=%7B519706C2-BDEF-438C-B037-385F4D8A3488%7D&file=DRIVE%20DE%20RESCISAO%20SHOPEE.xlsx" target="_blank">📈 Drive de Rescisão Shopee</a>
                     <a href="https://desafiorhcombr-my.sharepoint.com/:x:/r/personal/edivan_costa_wecanbr_com_br/_layouts/15/Doc.aspx?sourcedoc=%7B63D04DA0-C7A8-4059-8591-37DFCED94A93%7D&file=CENTRAL%20DE%20SOLICITA%25u00c7%25u00d5ES.xlsx" target="_blank">📋 Central de Solicitações (Base)</a>
+                    <a href="https://docs.google.com/spreadsheets/d/1WBYOF9AkoS7NpzhqFyqm5PzQRP13yUF2p5ZY8FfZp_c/edit#gid=690743947" target="_blank">🔍 Template Shopee</a>
+                    <a href="https://desafiorhcombr.sharepoint.com/:x:/r/sites/FSWECANBR/_layouts/15/Doc.aspx?sourcedoc=%7B6C34C14E-1ED6-4AA2-BFC8-EB14FD1936EF%7D&file=02%202026%20REJEITOS%20FEVEREIRO.xlsx&action=default&mobileredirect=true" target="_blank">⚠️ Rejeitos 02.2026</a>
+                </div>
+            </div>
+
+            <div class="dropdown">
+                <button class="dropdown-btn">📄 Documentos ▼</button>
+                <div class="dropdown-content">
+                    <a href="https://drive.google.com/file/d/1qsLtN-HC5488FVQc3n5mcT8zjCdVja0d/view" target="_blank">Carta de Suspensão</a>
+                    <a href="https://drive.google.com/file/d/1lGnjwLz_5i4uASifv2OPlkSb7NUGeaHI/view" target="_blank">Comunicado de Desligamento</a>
+                    <a href="https://drive.google.com/file/d/1zsrlh6KBLvMvEGc13tTA6I7Ybra5iObA/view" target="_blank">Advertência Disciplinar</a>
+                    <a href="https://drive.google.com/file/d/1_Dw1qLl9icW282pkZCNln8908Nfqiasi/view" target="_blank">Advertência - Ponto</a>
+                    <a href="https://drive.google.com/file/d/1aryngzuxX72mOhxchNmQPBA30QT2gNt2/view" target="_blank">Carta Banco Santander</a>
+                    <a href="https://drive.google.com/file/d/1PDp_bhtDB-ZR-wRwFUJ80Xpa4gWu_HkQ/view" target="_blank">Termo de Ciência - EPI</a>
+                    <a href="https://drive.google.com/file/d/1a_D1awqrBGXLaiKba6dc_ruE41dDF3ke/view" target="_blank">Dispensa Justa Causa</a>
+                    <a href="https://docs.google.com/document/d/1pqJ2b7wfCbjdAuKC99cIys9RYnenn2nkACDo33isZFE/edit" target="_blank">Aviso Prévio Indenizado</a>
+                    <a href="https://drive.google.com/file/d/16qsbtlkVBkIqZN_vjXK5T0gOEI7ivXWR/view" target="_blank">Declaração de Vínculo</a>
+                    <a href="https://drive.google.com/file/d/1CQQ3GTIUoOW9SGZ2EZTG8O3Q3ZFHk_El/view" target="_blank">DUT</a>
                 </div>
             </div>
         </div>
@@ -286,7 +304,6 @@
         function openModal() { document.getElementById('voucherModal').style.display = 'block'; }
         function closeModal() { document.getElementById('voucherModal').style.display = 'none'; }
 
-        // Fechar modal ao clicar fora dele
         window.onclick = function(event) {
             let modal = document.getElementById('voucherModal');
             if (event.target == modal) closeModal();

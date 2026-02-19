@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Apoio ao On-Site | WeCanBR</title>
-    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Inter:wght@400;600&display=swap" rel="stylesheet">
     <style>
         :root {
             --primary: #6a11cb;
@@ -15,7 +15,7 @@
             --navbar-bg: white;
             --danger: #ff4b2b;
             --excel: #1e7e34;
-            --signature: rgba(0, 0, 0, 0.15); /* Bem clarinho no modo claro */
+            --signature: rgba(0, 0, 0, 0.15);
         }
 
         [data-theme="dark"] {
@@ -23,7 +23,7 @@
             --card-bg: #1e1e1e;
             --text: #e0e0e0;
             --navbar-bg: #1e1e1e;
-            --signature: rgba(255, 255, 255, 0.05); /* Bem escurinho no modo escuro */
+            --signature: rgba(255, 255, 255, 0.05);
         }
 
         body {
@@ -91,7 +91,6 @@
             border-bottom: 1px solid rgba(128,128,128,0.2);
         }
 
-        /* CABEÇALHO COM A IMAGEM ORIGINAL */
         header {
             background: linear-gradient(rgba(106, 17, 203, 0.75), rgba(37, 117, 252, 0.75)), 
                         url('https://wecanbr.com.br/img/quem-somos/main.jpg');
@@ -119,18 +118,17 @@
 
         .result-item { display: block; padding: 10px 20px; color: var(--text); text-decoration: none; border-bottom: 1px solid rgba(128,128,128,0.1); text-align: left; }
 
-        /* CARDS */
         .container { display: flex; justify-content: center; flex-wrap: wrap; gap: 25px; padding: 50px 20px; max-width: 1200px; margin: 0 auto; }
         .card {
             background: var(--card-bg); border-radius: 15px; width: 300px; padding: 30px;
             text-align: center; box-shadow: 0 5px 15px rgba(0,0,0,0.05); transition: 0.3s;
             text-decoration: none; color: var(--text); border-top: 5px solid var(--primary); box-sizing: border-box;
+            cursor: pointer;
         }
         .card:hover { transform: translateY(-5px); box-shadow: 0 10px 25px rgba(0,0,0,0.1); }
         .card.hidden { display: none; }
         .icon { font-size: 45px; margin-bottom: 15px; display: block; }
 
-        /* PLANILHA */
         .sheet-section {
             max-width: 95%; margin: 20px auto 10px;
             background: var(--card-bg); padding: 10px; border-radius: 15px;
@@ -139,17 +137,12 @@
         .sheet-container { width: 100%; height: 600px; border-radius: 10px; border: 1px solid #ddd; overflow: hidden; }
         iframe { width: 100%; height: 100%; border: none; }
 
-        /* ASSINATURA DISCRETA */
         .signature {
-            text-align: center;
-            margin: 20px 0;
-            font-family: 'Great Vibes', cursive;
-            font-size: 1.3rem;
-            color: var(--signature);
-            user-select: none;
+            text-align: center; margin: 20px 0;
+            font-family: 'Great Vibes', cursive; font-size: 1.3rem;
+            color: var(--signature); user-select: none;
         }
 
-        /* BOTÃO TEMA */
         .theme-toggle {
             position: fixed; bottom: 20px; right: 20px; width: 50px; height: 50px;
             border-radius: 50%; background: var(--primary); color: white;
@@ -158,6 +151,40 @@
         }
 
         footer { text-align: center; padding: 30px; background: #222; color: white; }
+
+        /* MODAL DO FORMULÁRIO */
+        .modal {
+            display: none; position: fixed; z-index: 3000; left: 0; top: 0;
+            width: 100%; height: 100%; background-color: rgba(0,0,0,0.6);
+            backdrop-filter: blur(5px);
+        }
+        .modal-content {
+            background-color: var(--card-bg); margin: 5% auto; padding: 30px;
+            border-radius: 15px; width: 90%; max-width: 600px;
+            box-shadow: 0 5px 30px rgba(0,0,0,0.3); position: relative;
+        }
+        .close-modal {
+            position: absolute; right: 20px; top: 15px; font-size: 28px;
+            cursor: pointer; color: var(--text);
+        }
+
+        /* ESTILO INTERNO DO FORMULÁRIO */
+        .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-top: 20px; }
+        .full-width { grid-column: span 2; }
+        .form-group label { display: block; font-size: 11px; font-weight: bold; margin-bottom: 5px; color: #888; text-transform: uppercase; }
+        .form-group input { 
+            width: 100%; padding: 12px; border-radius: 8px; border: 1px solid #ddd; 
+            box-sizing: border-box; background: var(--bg); color: var(--text);
+        }
+        .btn-submit {
+            grid-column: span 2; background: var(--primary); color: white; padding: 15px;
+            border: none; border-radius: 8px; font-weight: bold; cursor: pointer; margin-top: 10px;
+        }
+        .btn-submit:disabled { background: #ccc; }
+        #statusMsg { 
+            grid-column: span 2; text-align: center; padding: 10px; border-radius: 8px; 
+            display: none; font-weight: bold; margin-top: 10px;
+        }
     </style>
 </head>
 <body>
@@ -167,33 +194,15 @@
     <nav class="navbar">
         <div style="font-weight: bold; color: var(--primary); letter-spacing: 1px;">WE CAN BR</div>
         <div class="nav-links">
-            <a href="https://script.google.com/macros/s/AKfycbz_oLTclTRNpccyAO1HnpINJqsUKDULMD_D03b404uPXHE2PCMVh7ta1XLOgP_MnEFFwg/exec" target="_blank" class="nav-item">📋 Cadastro Voucher</a>
-
+            <button onclick="openModal()" class="nav-item">📋 Cadastro Voucher</button>
             <div class="dropdown">
                 <button class="dropdown-btn">📊 Planilhas ▼</button>
                 <div class="dropdown-content">
                     <a href="https://desafiorhcombr-my.sharepoint.com/:x:/r/personal/mirian_oliveira_wecanbr_com_br/_layouts/15/doc2.aspx?sourcedoc=%7B519706C2-BDEF-438C-B037-385F4D8A3488%7D&file=DRIVE%20DE%20RESCISAO%20SHOPEE.xlsx" target="_blank">📈 Drive de Rescisão Shopee</a>
                     <a href="https://desafiorhcombr-my.sharepoint.com/:x:/r/personal/edivan_costa_wecanbr_com_br/_layouts/15/Doc.aspx?sourcedoc=%7B63D04DA0-C7A8-4059-8591-37DFCED94A93%7D&file=CENTRAL%20DE%20SOLICITA%25u00c7%25u00d5ES.xlsx" target="_blank">📋 Central de Solicitações (Base)</a>
-                    <a href="https://docs.google.com/spreadsheets/d/1WBYOF9AkoS7NpzhqFyqm5PzQRP13yUF2p5ZY8FfZp_c/edit#gid=690743947" target="_blank">🔍 Template Shopee</a>
-                    <a href="https://desafiorhcombr.sharepoint.com/:x:/r/sites/FSWECANBR/_layouts/15/Doc.aspx?sourcedoc=%7B6C34C14E-1ED6-4AA2-BFC8-EB14FD1936EF%7D&file=02%202026%20REJEITOS%20FEVEREIRO.xlsx&action=default&mobileredirect=true" target="_blank">⚠️ Rejeitos 02.2026</a>
                 </div>
             </div>
-
-            <div class="dropdown">
-                <button class="dropdown-btn">📄 Documentos ▼</button>
-                <div class="dropdown-content">
-                    <a href="https://drive.google.com/file/d/1qsLtN-HC5488FVQc3n5mcT8zjCdVja0d/view" target="_blank">Carta de Suspensão</a>
-                    <a href="https://drive.google.com/file/d/1lGnjwLz_5i4uASifv2OPlkSb7NUGeaHI/view" target="_blank">Comunicado de Desligamento</a>
-                    <a href="https://drive.google.com/file/d/1zsrlh6KBLvMvEGc13tTA6I7Ybra5iObA/view" target="_blank">Advertência Disciplinar</a>
-                    <a href="https://drive.google.com/file/d/1_Dw1qLl9icW282pkZCNln8908Nfqiasi/view" target="_blank">Advertência - Ponto</a>
-                    <a href="https://drive.google.com/file/d/1aryngzuxX72mOhxchNmQPBA30QT2gNt2/view" target="_blank">Carta Banco Santander</a>
-                    <a href="https://drive.google.com/file/d/1PDp_bhtDB-ZR-wRwFUJ80Xpa4gWu_HkQ/view" target="_blank">Termo de Ciência - EPI</a>
-                    <a href="https://drive.google.com/file/d/1a_D1awqrBGXLaiKba6dc_ruE41dDF3ke/view" target="_blank">Dispensa Justa Causa</a>
-                    <a href="https://docs.google.com/document/d/1pqJ2b7wfCbjdAuKC99cIys9RYnenn2nkACDo33isZFE/edit" target="_blank">Aviso Prévio Indenizado</a>
-                    <a href="https://drive.google.com/file/d/16qsbtlkVBkIqZN_vjXK5T0gOEI7ivXWR/view" target="_blank">Declaração de Vínculo</a>
-                    <a href="https://drive.google.com/file/d/1CQQ3GTIUoOW9SGZ2EZTG8O3Q3ZFHk_El/view" target="_blank">DUT</a>
-                </div>
-              </div>
+        </div>
     </nav>
 
     <header>
@@ -217,11 +226,48 @@
             <p>Formulário oficial para processo de desligamento.</p>
         </a>
 
-        <a href="https://script.google.com/macros/s/AKfycbwaUMInpOoJjnWIxaWCEDBkVcte289_6yZbKkbCRyl3oh0dYb2_6U1Hou1Qt25WbYhbgw/exec" target="_blank" class="card" style="border-top-color: var(--secondary);">
+        <div onclick="openModal()" class="card" style="border-top-color: var(--secondary);">
             <span class="icon">📋</span>
             <h2>Cadastro Voucher</h2>
-            <p>Acesse o sistema para realizar o cadastro de novos usuários no Voucher.</p>
-        </a>
+            <p>Realize o cadastro de novos usuários diretamente por aqui.</p>
+        </div>
+    </div>
+
+    <div id="voucherModal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeModal()">&times;</span>
+            <h2 style="margin-top: 0; color: var(--primary);">Cadastro Voucher Uber</h2>
+            <form id="uberForm">
+                <div class="form-grid">
+                    <div class="full-width form-group">
+                        <label>Centro de Custo</label>
+                        <input type="text" id="cc" required placeholder="Ex: Hub_SP_Jundiai">
+                    </div>
+                    <div class="form-group">
+                        <label>Matrícula</label>
+                        <input type="text" id="ma" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Nome Completo</label>
+                        <input type="text" id="nc" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Data Admissão</label>
+                        <input type="date" id="da" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Telefone</label>
+                        <input type="tel" id="te" required placeholder="(00) 00000-0000">
+                    </div>
+                    <div class="full-width form-group">
+                        <label>Horário (Entrada as Saída)</label>
+                        <input type="text" id="ho" required placeholder="Ex: 01:00 AS 08:49">
+                    </div>
+                    <button type="submit" id="btnEnv" class="btn-submit">CADASTRAR NO SISTEMA</button>
+                    <div id="statusMsg"></div>
+                </div>
+            </form>
+        </div>
     </div>
 
     <div class="sheet-section">
@@ -232,10 +278,57 @@
     </div>
 
     <div class="signature">By: Edivan Costa</div>
-
     <footer>© 2026 Apoio ao On-Site | WeCanBR</footer>
 
     <script>
+        const API_URL = "https://script.google.com/macros/s/AKfycbwZ6f1oUawstKe2i43TLU0wnqhsmmuXEagS76LTLjf8d9cFlZMoinqVmXZqlN5wzcuDfw/exec";
+
+        function openModal() { document.getElementById('voucherModal').style.display = 'block'; }
+        function closeModal() { document.getElementById('voucherModal').style.display = 'none'; }
+
+        // Fechar modal ao clicar fora dele
+        window.onclick = function(event) {
+            let modal = document.getElementById('voucherModal');
+            if (event.target == modal) closeModal();
+        }
+
+        document.getElementById('uberForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const btn = document.getElementById('btnEnv');
+            const msg = document.getElementById('statusMsg');
+            
+            btn.disabled = true;
+            btn.innerText = "PROCESSANDO...";
+
+            const payload = {
+                centroCusto: document.getElementById('cc').value,
+                matricula: document.getElementById('ma').value,
+                nomeCompleto: document.getElementById('nc').value,
+                dataAdmissao: document.getElementById('da').value,
+                telefone: document.getElementById('te').value,
+                horario: document.getElementById('ho').value,
+                emailUsuario: "Acesso Direto On-Site"
+            };
+
+            fetch(API_URL, {
+                method: 'POST',
+                mode: 'no-cors',
+                body: JSON.stringify(payload)
+            }).then(() => {
+                msg.innerText = "CADASTRO REALIZADO COM SUCESSO!";
+                msg.style.display = "block";
+                msg.style.backgroundColor = "#dcfce7";
+                msg.style.color = "#166534";
+                document.getElementById('uberForm').reset();
+                setTimeout(() => { closeModal(); msg.style.display = 'none'; }, 2000);
+            }).catch(() => {
+                alert("Erro ao conectar com o servidor.");
+            }).finally(() => {
+                btn.disabled = false;
+                btn.innerText = "CADASTRAR NO SISTEMA";
+            });
+        });
+
         function toggleTheme() {
             const html = document.documentElement;
             const btn = document.getElementById('themeBtn');

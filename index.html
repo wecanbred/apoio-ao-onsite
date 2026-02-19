@@ -6,174 +6,44 @@
     <title>Apoio ao On-Site | WeCanBR</title>
     <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Inter:wght@400;600&display=swap" rel="stylesheet">
     <style>
-        :root {
-            --primary: #6a11cb;
-            --secondary: #2575fc;
-            --bg: #f4f7f6;
-            --card-bg: white;
-            --text: #333;
-            --navbar-bg: white;
-            --danger: #ff4b2b;
-            --signature: rgba(0, 0, 0, 0.15);
-        }
+        :root { --primary: #6a11cb; --secondary: #2575fc; --bg: #f4f7f6; --card-bg: white; --text: #333; --navbar-bg: white; --danger: #ff4b2b; --excel: #1e7e34; }
+        [data-theme="dark"] { --bg: #121212; --card-bg: #1e1e1e; --text: #e0e0e0; --navbar-bg: #1e1e1e; }
+        
+        body { font-family: 'Inter', sans-serif; background-color: var(--bg); color: var(--text); margin: 0; padding-top: 60px; }
 
-        [data-theme="dark"] {
-            --bg: #121212;
-            --card-bg: #1e1e1e;
-            --text: #e0e0e0;
-            --navbar-bg: #1e1e1e;
-            --signature: rgba(255, 255, 255, 0.05);
-        }
+        /* TELA DE LOGIN */
+        #telaLogin { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: var(--bg); z-index: 9999; display: flex; align-items: center; justify-content: center; }
+        .auth-box { background: var(--card-bg); padding: 40px; border-radius: 15px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); width: 320px; text-align: center; }
+        .auth-box input { width: 100%; padding: 12px; margin-bottom: 10px; border-radius: 8px; border: 1px solid #ddd; box-sizing: border-box; }
+        .auth-box button { width: 100%; padding: 12px; border: none; border-radius: 8px; font-weight: bold; cursor: pointer; color: white; background: var(--primary); }
 
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: var(--bg);
-            color: var(--text);
-            margin: 0;
-            padding-top: 60px;
-            transition: 0.3s;
-        }
-
-        /* TELA DE BLOQUEIO (LOGIN/CADASTRO) */
-        #telaLogin {
-            position: fixed;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
-            background: var(--bg);
-            z-index: 9999;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .auth-box {
-            background: var(--card-bg);
-            padding: 40px;
-            border-radius: 15px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
-            width: 320px;
-            text-align: center;
-        }
-
-        .auth-box h2 { margin-bottom: 20px; }
-        .auth-box input {
-            width: 100%;
-            padding: 12px;
-            margin-bottom: 10px;
-            border-radius: 8px;
-            border: 1px solid #ddd;
-            box-sizing: border-box;
-            background: var(--bg);
-            color: var(--text);
-        }
-
-        .auth-box button {
-            width: 100%;
-            padding: 12px;
-            border: none;
-            border-radius: 8px;
-            font-weight: bold;
-            cursor: pointer;
-            color: white;
-        }
-
-        /* BARRA DE NAVEGAÇÃO */
-        .navbar {
-            background: var(--navbar-bg);
-            height: 60px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 0 30px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-            position: fixed;
-            top: 0; width: 100%; z-index: 1000;
-            box-sizing: border-box;
-        }
-
+        /* NAVBAR */
+        .navbar { background: var(--navbar-bg); height: 60px; display: flex; justify-content: space-between; align-items: center; padding: 0 30px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); position: fixed; top: 0; width: 100%; z-index: 1000; box-sizing: border-box; }
         .nav-links { display: flex; align-items: center; }
-        .dropdown { position: relative; display: flex; align-items: center; height: 60px; }
-
-        .dropdown-btn, .nav-item {
-            text-decoration: none;
-            color: var(--text);
-            margin-left: 25px;
-            font-weight: 600;
-            font-size: 0.9rem;
-            cursor: pointer;
-            border: none;
-            background: none;
-            display: flex;
-            align-items: center;
-            gap: 5px;
-        }
-
-        .dropdown-content {
-            display: none;
-            position: absolute;
-            right: 0;
-            background-color: var(--card-bg);
-            min-width: 250px;
-            box-shadow: 0px 8px 16px rgba(0,0,0,0.2);
-            z-index: 1001;
-            border-radius: 0 0 8px 8px;
-            top: 60px;
-            border-top: 2px solid var(--primary);
-        }
-
+        .dropdown { position: relative; height: 60px; display: flex; align-items: center; }
+        .dropdown-btn, .nav-item { background: none; border: none; color: var(--text); font-weight: 600; font-size: 0.9rem; margin-left: 20px; cursor: pointer; display: flex; align-items: center; gap: 5px; }
+        .dropdown-content { display: none; position: absolute; right: 0; top: 60px; background: var(--card-bg); min-width: 280px; box-shadow: 0 8px 16px rgba(0,0,0,0.1); border-top: 3px solid var(--primary); }
         .dropdown:hover .dropdown-content { display: block; }
-        .dropdown-content a {
-            color: var(--text);
-            padding: 12px 16px;
-            text-decoration: none;
-            display: block;
-            font-size: 0.85rem;
-            border-bottom: 1px solid rgba(128,128,128,0.1);
-        }
+        .dropdown-content a { color: var(--text); padding: 12px 16px; text-decoration: none; display: block; font-size: 0.85rem; border-bottom: 1px solid rgba(0,0,0,0.05); }
 
-        header {
-            background: linear-gradient(rgba(106, 17, 203, 0.75), rgba(37, 117, 252, 0.75)), 
-                        url('https://wecanbr.com.br/img/quem-somos/main.jpg');
-            background-size: cover;
-            background-position: center;
-            color: white;
-            padding: 60px 20px;
-            text-align: center;
-        }
-
+        header { background: linear-gradient(rgba(106, 17, 203, 0.8), rgba(37, 117, 252, 0.8)), url('https://wecanbr.com.br/img/quem-somos/main.jpg'); background-size: cover; background-position: center; color: white; padding: 60px 20px; text-align: center; }
+        
         .container { display: flex; justify-content: center; flex-wrap: wrap; gap: 20px; padding: 40px; max-width: 1200px; margin: 0 auto; }
-        .card {
-            background: var(--card-bg); border-radius: 15px; width: 280px; padding: 25px;
-            text-align: center; box-shadow: 0 5px 15px rgba(0,0,0,0.05); transition: 0.3s;
-            text-decoration: none; color: var(--text); border-top: 5px solid var(--primary);
-            cursor: pointer;
-        }
+        .card { background: var(--card-bg); border-radius: 15px; width: 280px; padding: 25px; text-align: center; box-shadow: 0 5px 15px rgba(0,0,0,0.05); text-decoration: none; color: var(--text); border-top: 5px solid var(--primary); cursor: pointer; transition: 0.3s; }
         .card:hover { transform: translateY(-5px); }
 
-        /* MODAL */
-        .modal {
-            display: none; position: fixed; z-index: 3000; left: 0; top: 0;
-            width: 100%; height: 100%; background-color: rgba(0,0,0,0.6);
-            backdrop-filter: blur(5px);
-        }
-        .modal-content {
-            background-color: var(--card-bg); margin: 5% auto; padding: 30px;
-            border-radius: 15px; width: 90%; max-width: 550px; position: relative;
-        }
+        .modal { display: none; position: fixed; z-index: 3000; left: 0; top: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); backdrop-filter: blur(5px); }
+        .modal-content { background: var(--card-bg); margin: 5% auto; padding: 30px; border-radius: 15px; width: 90%; max-width: 500px; position: relative; }
         .close-modal { position: absolute; right: 20px; top: 15px; font-size: 24px; cursor: pointer; }
 
-        .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 15px; }
+        .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 15px; }
         .full-width { grid-column: span 2; }
         .form-group label { display: block; font-size: 11px; font-weight: bold; margin-bottom: 4px; color: #888; }
         .form-group input { width: 100%; padding: 10px; border-radius: 6px; border: 1px solid #ddd; box-sizing: border-box; background: var(--bg); color: var(--text); }
-        
-        .btn-submit { grid-column: span 2; background: var(--primary); color: white; padding: 12px; border: none; border-radius: 8px; font-weight: bold; cursor: pointer; }
+        .btn-submit { grid-column: span 2; background: var(--primary); color: white; padding: 12px; border: none; border-radius: 8px; font-weight: bold; cursor: pointer; margin-top: 10px; }
 
         .sheet-section { max-width: 95%; margin: 20px auto; background: var(--card-bg); padding: 15px; border-radius: 15px; }
         .sheet-container { width: 100%; height: 500px; border-radius: 10px; border: 1px solid #ddd; overflow: hidden; }
-
-        .signature { text-align: center; margin: 20px 0; font-family: 'Great Vibes', cursive; font-size: 1.2rem; color: var(--signature); }
-        .theme-toggle { position: fixed; bottom: 20px; right: 20px; width: 45px; height: 45px; border-radius: 50%; background: var(--primary); color: white; border: none; cursor: pointer; z-index: 2001; }
     </style>
 </head>
 <body>
@@ -183,34 +53,47 @@
             <h2 style="color:var(--primary)">Acesso On-Site</h2>
             <input type="text" id="userLogin" placeholder="Usuário">
             <input type="password" id="passLogin" placeholder="Senha">
-            <button onclick="fazerLogin()" id="btnLogin" style="background:var(--primary)">ENTRAR</button>
-            <hr style="margin:20px 0; border:0; border-top:1px solid #eee;">
-            <p style="font-size:13px;">Novo aqui? <a href="#" onclick="alternarTelas('boxCriar')" style="color:var(--secondary); text-decoration:none; font-weight:bold;">Criar Acesso</a></p>
-            <p id="erroLogin" style="color:red; display:none; font-size:12px; margin-top:10px;">Login ou senha incorretos!</p>
+            <button onclick="fazerLogin()" id="btnLogin">ENTRAR</button>
+            <p style="font-size:13px; margin-top:15px;">Novo aqui? <a href="#" onclick="alternarTelas('boxCriar')" style="color:var(--secondary); text-decoration:none; font-weight:bold;">Criar Acesso</a></p>
         </div>
 
         <div id="boxCriar" class="auth-box" style="display:none;">
             <h2 style="color:var(--secondary)">Criar Novo Acesso</h2>
-            <input type="text" id="novoNome" placeholder="Seu Nome Completo">
-            <input type="text" id="novoUser" placeholder="Escolha um Usuário">
-            <input type="password" id="novaSenha" placeholder="Crie uma Senha">
-            <button onclick="criarConta()" id="btnCriar" style="background:var(--secondary)">CADASTRAR E ENTRAR</button>
-            <p style="font-size:13px; margin-top:15px;"><a href="#" onclick="alternarTelas('boxLogin')" style="color:#888; text-decoration:none;">Voltar para o Login</a></p>
+            <input type="text" id="novoNome" placeholder="Nome Completo">
+            <input type="text" id="novoUser" placeholder="Usuário">
+            <input type="password" id="novaSenha" placeholder="Senha">
+            <button onclick="criarConta()" id="btnCriar" style="background:var(--secondary)">CADASTRAR</button>
+            <p style="font-size:13px; margin-top:15px;"><a href="#" onclick="alternarTelas('boxLogin')" style="color:#888; text-decoration:none;">Voltar</a></p>
         </div>
     </div>
-
-    <button class="theme-toggle" onclick="toggleTheme()" id="themeBtn">🌙</button>
 
     <nav class="navbar">
         <div style="font-weight: bold; color: var(--primary);">WE CAN BR</div>
         <div class="nav-links">
             <span id="boasVindas" style="font-size: 0.8rem; font-weight: bold; color: var(--secondary);"></span>
+            
+            <div class="dropdown">
+                <button class="dropdown-btn">📊 Planilhas ▼</button>
+                <div class="dropdown-content">
+                    <a href="https://desafiorhcombr-my.sharepoint.com/:x:/r/personal/mirian_oliveira_wecanbr_com_br/_layouts/15/doc2.aspx?sourcedoc=%7B519706C2-BDEF-438C-B037-385F4D8A3488%7D&file=DRIVE%20DE%20RESCISAO%20SHOPEE.xlsx" target="_blank">Drive de Rescisão Shopee</a>
+                    <a href="https://desafiorhcombr-my.sharepoint.com/:x:/r/personal/edivan_costa_wecanbr_com_br/_layouts/15/Doc.aspx?sourcedoc=%7B63D04DA0-C7A8-4059-8591-37DFCED94A93%7D&file=CENTRAL%20DE%20SOLICITA%25u00c7%25u00d5ES.xlsx" target="_blank">Central de Solicitações (Base)</a>
+                    <a href="https://docs.google.com/spreadsheets/d/1WBYOF9AkoS7NpzhqFyqm5PzQRP13yUF2p5ZY8FfZp_c/edit#gid=690743947" target="_blank">Template Shopee</a>
+                    <a href="https://desafiorhcombr.sharepoint.com/:x:/r/sites/FSWECANBR/_layouts/15/Doc.aspx?sourcedoc=%7B6C34C14E-1ED6-4AA2-BFC8-EB14FD1936EF%7D&file=02%202026%20REJEITOS%20FEVEREIRO.xlsx" target="_blank">Rejeitos 02.2026</a>
+                </div>
+            </div>
+
             <div class="dropdown">
                 <button class="dropdown-btn">📄 Documentos ▼</button>
                 <div class="dropdown-content">
                     <a href="https://drive.google.com/file/d/1qsLtN-HC5488FVQc3n5mcT8zjCdVja0d/view" target="_blank">Carta de Suspensão</a>
+                    <a href="https://drive.google.com/file/d/1lGnjwLz_5i4uASifv2OPlkSb7NUGeaHI/view" target="_blank">Comunicado Desligamento</a>
                     <a href="https://drive.google.com/file/d/1zsrlh6KBLvMvEGc13tTA6I7Ybra5iObA/view" target="_blank">Advertência Disciplinar</a>
-                    <a href="https://docs.google.com/document/d/1pqJ2b7wfCbjdAuKC99cIys9RYnenn2nkACDo33isZFE/edit" target="_blank">Aviso Prévio</a>
+                    <a href="https://drive.google.com/file/d/1_Dw1qLl9icW282pkZCNln8908Nfqiasi/view" target="_blank">Advertência - Ponto</a>
+                    <a href="https://drive.google.com/file/d/1aryngzuxX72mOhxchNmQPBA30QT2gNt2/view" target="_blank">Carta Banco Santander</a>
+                    <a href="https://drive.google.com/file/d/1PDp_bhtDB-ZR-wRwFUJ80Xpa4gWu_HkQ/view" target="_blank">Termo de Ciência - EPI</a>
+                    <a href="https://drive.google.com/file/d/1a_D1awqrBGXLaiKba6dc_ruE41dDF3ke/view" target="_blank">Dispensa Justa Causa</a>
+                    <a href="https://docs.google.com/document/d/1pqJ2b7wfCbjdAuKC99cIys9RYnenn2nkACDo33isZFE/edit" target="_blank">Aviso Prévio Indenizado</a>
+                    <a href="https://drive.google.com/file/d/16qsbtlkVBkIqZN_vjXK5T0gOEI7ivXWR/view" target="_blank">Declaração de Vínculo</a>
                     <a href="https://drive.google.com/file/d/1CQQ3GTIUoOW9SGZ2EZTG8O3Q3ZFHk_El/view" target="_blank">DUT</a>
                 </div>
             </div>
@@ -220,52 +103,41 @@
 
     <header>
         <h1>APOIO AO ONSITE</h1>
-        <p>Bem-vindo ao painel de gerenciamento</p>
+        <p>Painel Integrado WeCanBR</p>
     </header>
 
     <div class="container">
-        <div onclick="openModal()" class="card">
+        <a href="https://forms.office.com/Pages/ResponsePage.aspx?id=fCAtUtXsx0-nbxdGSxFh-eVAzhwdpsxLmCSGMQwqNIpUM1E2TFRSRkhNWU9IQk9SVFhBSDJNWTFDVS4u" target="_blank" class="card">
+            <span style="font-size:40px">📝</span>
+            <h2>Central de Solicitações</h2>
+            <p>Plataforma para realizar solicitações internas.</p>
+        </a>
+
+        <div onclick="openModal()" class="card" style="border-top-color: var(--secondary);">
             <span style="font-size:40px">📋</span>
             <h2>Cadastro Voucher</h2>
             <p>Cadastre novos usuários no sistema Uber.</p>
         </div>
-        <a href="https://forms.office.com/r/fCAtUtXsx0" target="_blank" class="card" style="border-top-color: var(--danger);">
+
+        <a href="https://forms.office.com/Pages/ResponsePage.aspx?id=fCAtUtXsx0-nbxdGSxFh-f7MDqf4DUBBuOHjox7sxytUNFFQNTgzR1pQV0FLM05aWElXSjlRMjFHRy4u" target="_blank" class="card" style="border-top-color: var(--danger);">
             <span style="font-size:40px">🚫</span>
-            <h2>Desligamento</h2>
-            <p>Formulário oficial de desligamento Shopee.</p>
+            <h2>Desligamento Shopee</h2>
+            <p>Formulário oficial de desligamento.</p>
         </a>
     </div>
 
     <div id="voucherModal" class="modal">
         <div class="modal-content">
             <span class="close-modal" onclick="closeModal()">&times;</span>
-            <h2 style="color:var(--primary); margin:0;">Cadastro Voucher Uber</h2>
+            <h2 style="color:var(--primary)">Cadastro Voucher Uber</h2>
             <form id="uberForm">
                 <div class="form-grid">
-                    <div class="full-width form-group">
-                        <label>Centro de Custo</label>
-                        <input type="text" id="cc" required>
-                    </div>
-                    <div class="form-group">
-                        <label>Matrícula</label>
-                        <input type="text" id="ma" required>
-                    </div>
-                    <div class="form-group">
-                        <label>Nome Completo</label>
-                        <input type="text" id="nc" required>
-                    </div>
-                    <div class="form-group">
-                        <label>Data Admissão</label>
-                        <input type="date" id="da" required>
-                    </div>
-                    <div class="form-group">
-                        <label>Telefone</label>
-                        <input type="tel" id="te" required placeholder="(00) 00000-0000">
-                    </div>
-                    <div class="full-width form-group">
-                        <label>Horário</label>
-                        <input type="text" id="ho" required placeholder="Ex: 01:00 AS 08:49">
-                    </div>
+                    <div class="full-width form-group"><label>Centro de Custo</label><input type="text" id="cc" required></div>
+                    <div class="form-group"><label>Matrícula</label><input type="text" id="ma" required></div>
+                    <div class="form-group"><label>Nome Completo</label><input type="text" id="nc" required></div>
+                    <div class="form-group"><label>Data Admissão</label><input type="date" id="da" required></div>
+                    <div class="form-group"><label>Telefone</label><input type="tel" id="te" required></div>
+                    <div class="full-width form-group"><label>Horário</label><input type="text" id="ho" required placeholder="Ex: 01:00 AS 08:49"></div>
                     <button type="submit" id="btnEnv" class="btn-submit">FINALIZAR CADASTRO</button>
                 </div>
             </form>
@@ -278,12 +150,9 @@
         </div>
     </div>
 
-    <div class="signature">By: Edivan Costa</div>
-
     <script>
-        const API_URL = "https://script.google.com/macros/s/AKfycbwZ6f1oUawstKe2i43TLU0wnqhsmmuXEagS76LTLjf8d9cFlZMoinqVmXZqlN5wzcuDfw/exec";
+        const API_URL = "SUA_URL_DO_APPS_SCRIPT_AQUI";
 
-        // --- SISTEMA DE AUTENTICAÇÃO ---
         window.onload = function() {
             const nome = localStorage.getItem('usuarioNome');
             if(nome) {
@@ -300,55 +169,32 @@
         async function fazerLogin() {
             const user = document.getElementById('userLogin').value;
             const pass = document.getElementById('passLogin').value;
-            const btn = document.getElementById('btnLogin');
             if(!user || !pass) return;
 
-            btn.innerText = "ENTRANDO...";
-            const resp = await fetch(API_URL, {
-                method: 'POST',
-                body: JSON.stringify({ acao: "login", login: user, senha: pass })
-            });
+            const resp = await fetch(API_URL, { method: 'POST', body: JSON.stringify({ acao: "login", login: user, senha: pass }) });
             const res = await resp.json();
-
-            if(res.status === "sucesso") {
-                localStorage.setItem('usuarioNome', res.nome);
-                location.reload();
-            } else {
-                document.getElementById('erroLogin').style.display = 'block';
-                btn.innerText = "ENTRAR";
-            }
+            if(res.status === "sucesso") { localStorage.setItem('usuarioNome', res.nome); location.reload(); }
+            else { alert("Erro no login!"); }
         }
 
         async function criarConta() {
             const nome = document.getElementById('novoNome').value;
             const user = document.getElementById('novoUser').value;
             const pass = document.getElementById('novaSenha').value;
-            if(!nome || !user || !pass) return alert("Preencha tudo!");
+            if(!nome || !user || !pass) return;
 
-            document.getElementById('btnCriar').innerText = "CRIANDO...";
-            await fetch(API_URL, {
-                method: 'POST',
-                body: JSON.stringify({ acao: "criar_acesso", nome: nome, login: user, senha: pass })
-            });
+            // Enviamos sem no-cors para garantir que salve antes de recarregar
+            await fetch(API_URL, { method: 'POST', mode: 'no-cors', body: JSON.stringify({ acao: "criar_acesso", nome: nome, login: user, senha: pass }) });
             localStorage.setItem('usuarioNome', nome);
-            location.reload();
+            setTimeout(() => { location.reload(); }, 1000);
         }
 
-        function logout() {
-            localStorage.removeItem('usuarioNome');
-            location.reload();
-        }
-
-        // --- FUNÇÕES DO SITE ---
+        function logout() { localStorage.removeItem('usuarioNome'); location.reload(); }
         function openModal() { document.getElementById('voucherModal').style.display = 'block'; }
         function closeModal() { document.getElementById('voucherModal').style.display = 'none'; }
 
         document.getElementById('uberForm').addEventListener('submit', function(e) {
             e.preventDefault();
-            const btn = document.getElementById('btnEnv');
-            btn.disabled = true;
-            btn.innerText = "ENVIANDO...";
-
             const payload = {
                 acao: "cadastrar_colaborador",
                 centroCusto: document.getElementById('cc').value,
@@ -359,30 +205,9 @@
                 horario: document.getElementById('ho').value,
                 usuarioLogado: localStorage.getItem('usuarioNome')
             };
-
             fetch(API_URL, { method: 'POST', mode: 'no-cors', body: JSON.stringify(payload) })
-            .then(() => {
-                alert("Sucesso! Cadastrado por: " + localStorage.getItem('usuarioNome'));
-                document.getElementById('uberForm').reset();
-                closeModal();
-            })
-            .finally(() => {
-                btn.disabled = false;
-                btn.innerText = "FINALIZAR CADASTRO";
-            });
+            .then(() => { alert("Cadastro Realizado!"); closeModal(); });
         });
-
-        function toggleTheme() {
-            const html = document.documentElement;
-            const btn = document.getElementById('themeBtn');
-            if (html.getAttribute('data-theme') === 'dark') {
-                html.removeAttribute('data-theme');
-                btn.innerHTML = "🌙";
-            } else {
-                html.setAttribute('data-theme', 'dark');
-                btn.innerHTML = "☀️";
-            }
-        }
     </script>
 </body>
 </html>

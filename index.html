@@ -51,6 +51,21 @@
         }
 
         .nav-links { display: flex; align-items: center; height: 100%; }
+        
+        /* Botão de Login Microsoft */
+        .login-btn {
+            text-decoration: none;
+            background: #0078d4;
+            color: white !important;
+            padding: 6px 15px;
+            border-radius: 5px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            margin-left: 15px;
+            transition: 0.3s;
+        }
+        .login-btn:hover { background: #005a9e; opacity: 0.9; }
+
         .dropdown { position: relative; display: flex; align-items: center; height: 100%; }
 
         .dropdown-btn {
@@ -168,6 +183,8 @@
     <nav class="navbar">
         <div style="font-weight: bold; color: var(--primary); letter-spacing: 1px;">WE CAN BR</div>
         <div class="nav-links">
+            <a href="https://portal.office.com" target="_blank" class="login-btn">🔑 Login Microsoft</a>
+
             <div class="dropdown">
                 <button class="dropdown-btn">📊 Planilhas ▼</button>
                 <div class="dropdown-content">

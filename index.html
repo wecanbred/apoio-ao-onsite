@@ -14,9 +14,8 @@
             --text: #333;
             --navbar-bg: white;
             --danger: #ff4b2b;
-            --excel: #1e7e34;
             --warning: #f39c12;
-            --signature: rgba(0, 0, 0, 0.15);
+            --signature: rgba(0, 0, 0, 0.2);
         }
 
         [data-theme="dark"] {
@@ -36,7 +35,7 @@
             transition: 0.3s;
         }
 
-        /* --- ESTILOS DA MODAL (TESTE CENTRAL) --- */
+        /* --- SISTEMA DE MODAL (FORMULÁRIO) --- */
         .modal-overlay {
             display: none;
             position: fixed;
@@ -49,9 +48,9 @@
         }
 
         .modal-content {
-            width: 90%;
-            max-width: 800px;
-            height: 85vh;
+            width: 95%;
+            max-width: 850px;
+            height: 90vh;
             background: var(--card-bg);
             border-radius: 15px;
             position: relative;
@@ -61,10 +60,10 @@
 
         .close-modal {
             position: absolute;
-            top: 10px; right: 15px;
-            font-size: 30px;
+            top: 10px; right: 20px;
+            font-size: 35px;
             cursor: pointer;
-            color: var(--text);
+            color: var(--danger);
             z-index: 3001;
             font-weight: bold;
         }
@@ -74,8 +73,8 @@
             height: 100%;
             border: none;
         }
-        /* --------------------------------------- */
 
+        /* --- NAVBAR --- */
         .navbar {
             background: var(--navbar-bg);
             height: 60px;
@@ -89,40 +88,7 @@
             box-sizing: border-box;
         }
 
-        .nav-links { display: flex; align-items: center; height: 100%; }
-        .dropdown { position: relative; display: flex; align-items: center; height: 100%; }
-
-        .dropdown-btn, .nav-item {
-            text-decoration: none;
-            color: var(--text);
-            margin-left: 25px;
-            font-weight: 600;
-            font-size: 0.9rem;
-            cursor: pointer;
-            border: none;
-            background: none;
-            display: flex;
-            align-items: center;
-            gap: 5px;
-            height: 100%;
-        }
-
-        .dropdown-content {
-            display: none;
-            position: absolute;
-            right: 0;
-            background-color: var(--card-bg);
-            min-width: 300px;
-            box-shadow: 0px 8px 16px rgba(0,0,0,0.2);
-            z-index: 1001;
-            border-radius: 0 0 8px 8px;
-            top: 60px;
-            border-top: 2px solid var(--primary);
-            overflow: hidden;
-        }
-
-        .dropdown:hover .dropdown-content { display: block; }
-
+        /* --- HEADER --- */
         header {
             background: linear-gradient(rgba(106, 17, 203, 0.75), rgba(37, 117, 252, 0.75)), 
                         url('https://wecanbr.com.br/img/quem-somos/main.jpg');
@@ -133,6 +99,9 @@
             text-align: center;
         }
 
+        header h1 { font-size: 2.5rem; text-transform: uppercase; letter-spacing: 2px; margin: 0; }
+
+        /* --- CARDS --- */
         .container { display: flex; justify-content: center; flex-wrap: wrap; gap: 20px; padding: 40px 20px; max-width: 1400px; margin: 0 auto; }
         
         .card {
@@ -142,19 +111,53 @@
             box-sizing: border-box; cursor: pointer;
         }
         .card:hover { transform: translateY(-5px); box-shadow: 0 10px 25px rgba(0,0,0,0.1); }
-        
+        .icon { font-size: 40px; margin-bottom: 15px; display: block; }
+
+        /* --- SEÇÃO DA PLANILHA (CORRIGIDA) --- */
         .sheet-section {
-            max-width: 95%; margin: 20px auto 10px;
-            background: var(--card-bg); padding: 10px; border-radius: 15px;
+            max-width: 95%; margin: 20px auto 40px;
+            background: var(--card-bg); padding: 15px; border-radius: 15px;
             box-shadow: 0 10px 30px rgba(0,0,0,0.1);
         }
-        .sheet-container { width: 100%; height: 600px; border-radius: 10px; border: 1px solid #ddd; overflow: hidden; }
+        
+        .sheet-container { 
+            width: 100%; 
+            height: 700px; /* Altura ideal para visualização */
+            border-radius: 10px; 
+            border: 1px solid rgba(128,128,128,0.2); 
+            overflow: hidden; 
+        }
 
-        .signature { text-align: center; margin: 20px 0; font-family: 'Great Vibes', cursive; font-size: 1.3rem; color: var(--signature); }
-        footer { text-align: center; padding: 30px; background: #222; color: white; }
+        /* Garante que o iframe ocupe 100% do container */
+        .sheet-container iframe { 
+            width: 100% !important; 
+            height: 100% !important; 
+            border: none; 
+        }
+
+        /* --- RODAPÉ E ASSINATURA --- */
+        .signature {
+            text-align: center;
+            margin: 20px 0;
+            font-family: 'Great Vibes', cursive;
+            font-size: 1.5rem;
+            color: var(--signature);
+            user-select: none;
+        }
+
+        footer { text-align: center; padding: 30px; background: #222; color: white; width: 100%; }
+
+        .theme-toggle {
+            position: fixed; bottom: 20px; right: 20px; width: 50px; height: 50px;
+            border-radius: 50%; background: var(--primary); color: white;
+            border: none; cursor: pointer; box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+            z-index: 2001; font-size: 20px;
+        }
     </style>
 </head>
 <body>
+
+    <button class="theme-toggle" onclick="toggleTheme()" id="themeBtn">🌙</button>
 
     <div id="modalForm" class="modal-overlay">
         <div class="modal-content">
@@ -165,65 +168,72 @@
 
     <nav class="navbar">
         <div style="font-weight: bold; color: var(--primary); letter-spacing: 1px;">WE CAN BR</div>
-        <div class="nav-links">
-            <div class="dropdown">
-                <button class="dropdown-btn">📊 Planilhas ▼</button>
-                <div class="dropdown-content">
-                    <a href="https://desafiorhcombr-my.sharepoint.com/:x:/r/personal/mirian_oliveira_wecanbr_com_br/_layouts/15/Doc.aspx?sourcedoc=%7B9C5EACCF-57D1-4415-BA2B-D584B9FE2B85%7D" target="_blank">📋 Controle de Atendimento</a>
-                </div>
-            </div>
-        </div>
     </nav>
 
     <header>
         <h1>APOIO AO ONSITE</h1>
     </header>
 
-    <div class="container">
+    <div class="container" id="cardContainer">
         <div onclick="openForm()" class="card">
-            <span style="font-size: 40px;">📝</span>
+            <span class="icon">📝</span>
             <h2>Central de Solicitações</h2>
-            <p>Clique para abrir o formulário aqui mesmo.</p>
+            <p>Clique para abrir o formulário diretamente aqui.</p>
         </div>
 
         <a href="https://forms.office.com/Pages/ResponsePage.aspx?id=fCAtUtXsx0-nbxdGSxFh-f7MDqf4DUBBuOHjox7sxytUNFFQNTgzR1pQV0FLM05aWElXSjlRMjFHRy4u" target="_blank" class="card" style="border-top-color: var(--danger);">
-            <span style="font-size: 40px;">🚫</span>
+            <span class="icon">🚫</span>
             <h2>Desligamento Shopee</h2>
             <p>Formulário oficial para desligamento.</p>
         </a>
 
         <a href="https://forms.office.com/Pages/ResponsePage.aspx?id=fCAtUtXsx0-nbxdGSxFh-f7MDqf4DUBBuOHjox7sxytUMzdRMTFCOTc2SzZEQzU4NFI2TVMzUjIxWS4u" target="_blank" class="card" style="border-top-color: var(--warning);">
-            <span style="font-size: 40px;">🎧</span>
+            <span class="icon">🎧</span>
             <h2>Controle de Atendimento</h2>
-            <p>Registro de atendimentos Shopee.</p>
+            <p>Registro e controle de atendimentos Shopee.</p>
         </a>
     </div>
 
     <div class="sheet-section">
         <div style="padding: 10px; font-weight: bold; color: var(--primary);">📊 Planilha de Controle</div>
         <div class="sheet-container">
-            <iframe src="https://desafiorhcombr-my.sharepoint.com/personal/mirian_oliveira_wecanbr_com_br/_layouts/15/Doc.aspx?sourcedoc={9c5eaccf-57d1-4415-ba2b-d584b9fe2b85}&action=embedview"></iframe>
+            <iframe src="https://desafiorhcombr-my.sharepoint.com/personal/mirian_oliveira_wecanbr_com_br/_layouts/15/Doc.aspx?sourcedoc={9c5eaccf-57d1-4415-ba2b-d584b9fe2b85}&action=embedview&wdAllowInteractivity=False&wdHideGridlines=True&wdHideHeaders=True&wdDownloadButton=True&wdInConfigurator=True"></iframe>
         </div>
     </div>
 
     <div class="signature">By: Edivan Costa</div>
+
     <footer>© 2026 Apoio ao On-Site | WeCanBR</footer>
 
     <script>
+        // Funções da Modal
         function openForm() {
             document.getElementById('modalForm').style.display = 'flex';
-            document.body.style.overflow = 'hidden'; // Trava o scroll do fundo
+            document.body.style.overflow = 'hidden';
         }
 
         function closeForm() {
             document.getElementById('modalForm').style.display = 'none';
-            document.body.style.overflow = 'auto'; // Destrava o scroll
+            document.body.style.overflow = 'auto';
         }
 
-        // Fecha se clicar fora da modal
+        // Fecha modal ao clicar fora dela
         window.onclick = function(event) {
             let modal = document.getElementById('modalForm');
             if (event.target == modal) closeForm();
+        }
+
+        // Função do Tema Dark/Light
+        function toggleTheme() {
+            const html = document.documentElement;
+            const btn = document.getElementById('themeBtn');
+            if (html.getAttribute('data-theme') === 'dark') {
+                html.removeAttribute('data-theme');
+                btn.innerHTML = "🌙";
+            } else {
+                html.setAttribute('data-theme', 'dark');
+                btn.innerHTML = "☀️";
+            }
         }
     </script>
 </body>

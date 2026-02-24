@@ -36,6 +36,46 @@
             transition: 0.3s;
         }
 
+        /* --- ESTILOS DA MODAL (TESTE CENTRAL) --- */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 3000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            width: 90%;
+            max-width: 800px;
+            height: 85vh;
+            background: var(--card-bg);
+            border-radius: 15px;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 10px; right: 15px;
+            font-size: 30px;
+            cursor: pointer;
+            color: var(--text);
+            z-index: 3001;
+            font-weight: bold;
+        }
+
+        .modal-content iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+        /* --------------------------------------- */
+
         .navbar {
             background: var(--navbar-bg);
             height: 60px;
@@ -82,14 +122,6 @@
         }
 
         .dropdown:hover .dropdown-content { display: block; }
-        .dropdown-content a {
-            color: var(--text);
-            padding: 12px 16px;
-            text-decoration: none;
-            display: block;
-            font-size: 0.85rem;
-            border-bottom: 1px solid rgba(128,128,128,0.2);
-        }
 
         header {
             background: linear-gradient(rgba(106, 17, 203, 0.75), rgba(37, 117, 252, 0.75)), 
@@ -101,74 +133,35 @@
             text-align: center;
         }
 
-        header h1 { font-size: 2.5rem; text-transform: uppercase; letter-spacing: 2px; margin: 0; }
-
-        .search-container { margin-top: 25px; position: relative; width: 400px; max-width: 85%; margin: 0 auto; }
-        #searchInput {
-            padding: 15px 25px; width: 100%; border-radius: 30px; border: none;
-            font-size: 1rem; box-shadow: 0 5px 15px rgba(0,0,0,0.2); outline: none;
-            background: var(--card-bg); color: var(--text); box-sizing: border-box;
-        }
-
-        #searchResults {
-            position: absolute; top: 55px; left: 0; width: 100%;
-            background: var(--card-bg); border-radius: 10px; box-shadow: 0 10px 20px rgba(0,0,0,0.2);
-            display: none; z-index: 2000; max-height: 300px; overflow-y: auto;
-        }
-
-        .result-item { display: block; padding: 10px 20px; color: var(--text); text-decoration: none; border-bottom: 1px solid rgba(128,128,128,0.1); text-align: left; }
-
         .container { display: flex; justify-content: center; flex-wrap: wrap; gap: 20px; padding: 40px 20px; max-width: 1400px; margin: 0 auto; }
+        
         .card {
             background: var(--card-bg); border-radius: 15px; width: 280px; padding: 25px;
             text-align: center; box-shadow: 0 5px 15px rgba(0,0,0,0.05); transition: 0.3s;
-            text-decoration: none; color: var(--text); border-top: 5px solid var(--primary); box-sizing: border-box;
+            text-decoration: none; color: var(--text); border-top: 5px solid var(--primary); 
+            box-sizing: border-box; cursor: pointer;
         }
         .card:hover { transform: translateY(-5px); box-shadow: 0 10px 25px rgba(0,0,0,0.1); }
-        .card.hidden { display: none; }
-        .icon { font-size: 40px; margin-bottom: 15px; display: block; }
-
-        .extra-section { max-width: 1200px; margin: 0 auto 40px; padding: 0 20px; }
-        .extra-title { font-weight: bold; color: var(--primary); margin-bottom: 15px; font-size: 1.2rem; border-left: 5px solid var(--primary); padding-left: 10px; }
-        .extra-card {
-            background: var(--card-bg); border-radius: 12px; padding: 20px;
-            display: flex; align-items: center; gap: 20px; text-decoration: none; color: var(--text);
-            box-shadow: 0 4px 10px rgba(0,0,0,0.05); transition: 0.3s; border: 1px solid rgba(128,128,128,0.1);
-        }
-        .extra-card:hover { border-color: var(--primary); transform: translateX(5px); }
-
+        
         .sheet-section {
             max-width: 95%; margin: 20px auto 10px;
             background: var(--card-bg); padding: 10px; border-radius: 15px;
             box-shadow: 0 10px 30px rgba(0,0,0,0.1);
         }
         .sheet-container { width: 100%; height: 600px; border-radius: 10px; border: 1px solid #ddd; overflow: hidden; }
-        
-        /* Ajuste do iframe para ocupar todo o espaço do container */
-        .sheet-container iframe { width: 100%; height: 100%; border: none; }
 
-        .signature {
-            text-align: center;
-            margin: 20px 0;
-            font-family: 'Great Vibes', cursive;
-            font-size: 1.3rem;
-            color: var(--signature);
-            user-select: none;
-        }
-
-        .theme-toggle {
-            position: fixed; bottom: 20px; right: 20px; width: 50px; height: 50px;
-            border-radius: 50%; background: var(--primary); color: white;
-            border: none; cursor: pointer; box-shadow: 0 4px 15px rgba(0,0,0,0.3);
-            z-index: 2001; font-size: 20px;
-        }
-
+        .signature { text-align: center; margin: 20px 0; font-family: 'Great Vibes', cursive; font-size: 1.3rem; color: var(--signature); }
         footer { text-align: center; padding: 30px; background: #222; color: white; }
     </style>
 </head>
 <body>
 
-    <button class="theme-toggle" onclick="toggleTheme()" id="themeBtn">🌙</button>
+    <div id="modalForm" class="modal-overlay">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeForm()">&times;</span>
+            <iframe src="https://forms.office.com/Pages/ResponsePage.aspx?id=fCAtUtXsx0-nbxdGSxFh-eVAzhwdpsxLmCSGMQwqNIpUM1E2TFRSRkhNWU9IQk9SVFhBSDJNWTFDVS4u&embed=true"></iframe>
+        </div>
+    </div>
 
     <nav class="navbar">
         <div style="font-weight: bold; color: var(--primary); letter-spacing: 1px;">WE CAN BR</div>
@@ -176,27 +169,7 @@
             <div class="dropdown">
                 <button class="dropdown-btn">📊 Planilhas ▼</button>
                 <div class="dropdown-content">
-                    <a href="https://desafiorhcombr-my.sharepoint.com/:x:/r/personal/mirian_oliveira_wecanbr_com_br/_layouts/15/Doc.aspx?sourcedoc=%7B9C5EACCF-57D1-4415-BA2B-D584B9FE2B85%7D&file=CONTROLE%20DE%20ATENDIMENTO%25u00a0%20SHOPEE.xlsx&fromShare=true&action=default&mobileredirect=true" target="_blank">📋 Controle de Atendimento (Excel)</a>
-                    <a href="https://desafiorhcombr-my.sharepoint.com/:x:/r/personal/mirian_oliveira_wecanbr_com_br/_layouts/15/doc2.aspx?sourcedoc=%7B519706C2-BDEF-438C-B037-385F4D8A3488%7D&file=DRIVE%20DE%20RESCISAO%20SHOPEE.xlsx" target="_blank">📈 Drive de Rescisão Shopee</a>
-                    <a href="https://desafiorhcombr-my.sharepoint.com/:x:/r/personal/edivan_costa_wecanbr_com_br/_layouts/15/Doc.aspx?sourcedoc=%7B63D04DA0-C7A8-4059-8591-37DFCED94A93%7D&file=CENTRAL%20DE%20SOLICITA%25u00c7%25u00d5ES.xlsx" target="_blank">📋 Central de Solicitações (Base)</a>
-                    <a href="https://docs.google.com/spreadsheets/d/1WBYOF9AkoS7NpzhqFyqm5PzQRP13yUF2p5ZY8FfZp_c/edit#gid=690743947" target="_blank">🔍 Template Shopee</a>
-                    <a href="https://desafiorhcombr.sharepoint.com/:x:/r/sites/FSWECANBR/_layouts/15/Doc.aspx?sourcedoc=%7B6C34C14E-1ED6-4AA2-BFC8-EB14FD1936EF%7D&file=02%202026%20REJEITOS%20FEVEREIRO.xlsx&action=default&mobileredirect=true" target="_blank">⚠️ Rejeitos 02.2026</a>
-                </div>
-            </div>
-
-            <div class="dropdown">
-                <button class="dropdown-btn">📄 Documentos ▼</button>
-                <div class="dropdown-content">
-                    <a href="https://drive.google.com/file/d/1qsLtN-HC5488FVQc3n5mcT8zjCdVja0d/view" target="_blank">Carta de Suspensão</a>
-                    <a href="https://drive.google.com/file/d/1lGnjwLz_5i4uASifv2OPlkSb7NUGeaHI/view" target="_blank">Comunicado de Desligamento</a>
-                    <a href="https://drive.google.com/file/d/1zsrlh6KBLvMvEGc13tTA6I7Ybra5iObA/view" target="_blank">Advertência Disciplinar</a>
-                    <a href="https://drive.google.com/file/d/1_Dw1qLl9icW282pkZCNln8908Nfqiasi/view" target="_blank">Advertência - Ponto</a>
-                    <a href="https://drive.google.com/file/d/1aryngzuxX72mOhxchNmQPBA30QT2gNt2/view" target="_blank">Carta Banco Santander</a>
-                    <a href="https://drive.google.com/file/d/1PDp_bhtDB-ZR-wRwFUJ80Xpa4gWu_HkQ/view" target="_blank">Termo de Ciência - EPI</a>
-                    <a href="https://drive.google.com/file/d/1a_D1awqrBGXLaiKba6dc_ruE41dDF3ke/view" target="_blank">Dispensa Justa Causa</a>
-                    <a href="https://docs.google.com/document/d/1pqJ2b7wfCbjdAuKC99cIys9RYnenn2nkACDo33isZFE/edit" target="_blank">Aviso Prévio Indenizado</a>
-                    <a href="https://drive.google.com/file/d/16qsbtlkVBkIqZN_vjXK5T0gOEI7ivXWR/view" target="_blank">Declaração de Vínculo</a>
-                    <a href="https://drive.google.com/file/d/1CQQ3GTIUoOW9SGZ2EZTG8O3Q3ZFHk_El/view" target="_blank">DUT</a>
+                    <a href="https://desafiorhcombr-my.sharepoint.com/:x:/r/personal/mirian_oliveira_wecanbr_com_br/_layouts/15/Doc.aspx?sourcedoc=%7B9C5EACCF-57D1-4415-BA2B-D584B9FE2B85%7D" target="_blank">📋 Controle de Atendimento</a>
                 </div>
             </div>
         </div>
@@ -204,92 +177,53 @@
 
     <header>
         <h1>APOIO AO ONSITE</h1>
-        <div class="search-container">
-            <input type="text" id="searchInput" onkeyup="buscarTudo()" placeholder="Pesquisar..." autocomplete="off">
-            <div id="searchResults"></div>
-        </div>
     </header>
 
-    <div class="container" id="cardContainer">
-        <a href="https://forms.office.com/Pages/ResponsePage.aspx?id=fCAtUtXsx0-nbxdGSxFh-eVAzhwdpsxLmCSGMQwqNIpUM1E2TFRSRkhNWU9IQk9SVFhBSDJNWTFDVS4u" target="_blank" class="card">
-            <span class="icon">📝</span>
+    <div class="container">
+        <div onclick="openForm()" class="card">
+            <span style="font-size: 40px;">📝</span>
             <h2>Central de Solicitações</h2>
-            <p>Plataforma para realizar solicitações internas.</p>
-        </a>
+            <p>Clique para abrir o formulário aqui mesmo.</p>
+        </div>
 
         <a href="https://forms.office.com/Pages/ResponsePage.aspx?id=fCAtUtXsx0-nbxdGSxFh-f7MDqf4DUBBuOHjox7sxytUNFFQNTgzR1pQV0FLM05aWElXSjlRMjFHRy4u" target="_blank" class="card" style="border-top-color: var(--danger);">
-            <span class="icon">🚫</span>
+            <span style="font-size: 40px;">🚫</span>
             <h2>Desligamento Shopee</h2>
             <p>Formulário oficial para desligamento.</p>
         </a>
 
-        <a href="https://forms.office.com/Pages/ResponsePage.aspx?id=fCAtUtXsx0-nbxdGSxFh-f7MDqf4DUBBuOHjox7sxytUMzdRMTFCOTc2SzZEQzU4NFI2TVMzUjIxWS4u&origin=Invitation&channel=0" target="_blank" class="card" style="border-top-color: var(--warning);">
-            <span class="icon">🎧</span>
+        <a href="https://forms.office.com/Pages/ResponsePage.aspx?id=fCAtUtXsx0-nbxdGSxFh-f7MDqf4DUBBuOHjox7sxytUMzdRMTFCOTc2SzZEQzU4NFI2TVMzUjIxWS4u" target="_blank" class="card" style="border-top-color: var(--warning);">
+            <span style="font-size: 40px;">🎧</span>
             <h2>Controle de Atendimento</h2>
-            <p>Registro e controle de atendimentos Shopee.</p>
-        </a>
-    </div>
-
-    <div class="extra-section">
-        <div class="extra-title">Outros FORMS:</div>
-        <a href="https://forms.office.com/pages/responsepage.aspx?id=fCAtUtXsx0-nbxdGSxFh-f7MDqf4DUBBuOHjox7sxytUM1pLUFZVQjkxV1ZUNkY2RU1CWVQ1MVJZOS4u&route=shorturl" target="_blank" class="extra-card">
-            <span style="font-size: 30px;">💰</span>
-            <div>
-                <strong style="display: block; margin-bottom: 5px; color: var(--primary);">REEMBOLSO DE HE/FALTAS E DESCONTOS INDEVIDOS - SHOPEE</strong>
-                <small style="color: var(--text); opacity: 0.8;">Forms para solicitar reembolso de FALTAS que foram descontadas indevidamente, HE que não foram pagas, e outros reembolsos que devem ser pagos em folha.</small>
-            </div>
+            <p>Registro de atendimentos Shopee.</p>
         </a>
     </div>
 
     <div class="sheet-section">
         <div style="padding: 10px; font-weight: bold; color: var(--primary);">📊 Planilha de Controle</div>
         <div class="sheet-container">
-            <iframe src="https://desafiorhcombr-my.sharepoint.com/personal/mirian_oliveira_wecanbr_com_br/_layouts/15/Doc.aspx?sourcedoc={9c5eaccf-57d1-4415-ba2b-d584b9fe2b85}&action=embedview&wdAllowInteractivity=False&wdHideGridlines=True&wdHideHeaders=True&wdDownloadButton=True&wdInConfigurator=True"></iframe>
+            <iframe src="https://desafiorhcombr-my.sharepoint.com/personal/mirian_oliveira_wecanbr_com_br/_layouts/15/Doc.aspx?sourcedoc={9c5eaccf-57d1-4415-ba2b-d584b9fe2b85}&action=embedview"></iframe>
         </div>
     </div>
 
     <div class="signature">By: Edivan Costa</div>
-
     <footer>© 2026 Apoio ao On-Site | WeCanBR</footer>
 
     <script>
-        function toggleTheme() {
-            const html = document.documentElement;
-            const btn = document.getElementById('themeBtn');
-            if (html.getAttribute('data-theme') === 'dark') {
-                html.removeAttribute('data-theme');
-                btn.innerHTML = "🌙";
-            } else {
-                html.setAttribute('data-theme', 'dark');
-                btn.innerHTML = "☀️";
-            }
+        function openForm() {
+            document.getElementById('modalForm').style.display = 'flex';
+            document.body.style.overflow = 'hidden'; // Trava o scroll do fundo
         }
 
-        function buscarTudo() {
-            let input = document.getElementById('searchInput').value.toLowerCase();
-            let resultsDiv = document.getElementById('searchResults');
-            let cards = document.getElementsByClassName('card');
-            let dropdownLinks = document.querySelectorAll('.dropdown-content a');
-            
-            resultsDiv.innerHTML = "";
-            if (input.length < 2) {
-                resultsDiv.style.display = "none";
-                for (let card of cards) card.classList.remove('hidden');
-                return;
-            }
+        function closeForm() {
+            document.getElementById('modalForm').style.display = 'none';
+            document.body.style.overflow = 'auto'; // Destrava o scroll
+        }
 
-            let achouNoMenu = false;
-            dropdownLinks.forEach(link => {
-                if (link.innerText.toLowerCase().includes(input)) {
-                    achouNoMenu = true;
-                    resultsDiv.innerHTML += `<a href="${link.href}" target="_blank" class="result-item">🔗 ${link.innerText}</a>`;
-                }
-            });
-
-            for (let card of cards) {
-                card.classList.toggle('hidden', !card.innerText.toLowerCase().includes(input));
-            }
-            resultsDiv.style.display = achouNoMenu ? "block" : "none";
+        // Fecha se clicar fora da modal
+        window.onclick = function(event) {
+            let modal = document.getElementById('modalForm');
+            if (event.target == modal) closeForm();
         }
     </script>
 </body>

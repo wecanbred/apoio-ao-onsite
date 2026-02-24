@@ -15,6 +15,7 @@
             --navbar-bg: white;
             --danger: #ff4b2b;
             --warning: #f39c12;
+            --voucher: #00b894;
             --signature: rgba(0, 0, 0, 0.2);
         }
 
@@ -35,7 +36,7 @@
             transition: 0.3s;
         }
 
-        /* --- SISTEMA DE MODAL (FORMULÁRIO) --- */
+        /* --- SISTEMA DE MODAIS --- */
         .modal-overlay {
             display: none;
             position: fixed;
@@ -113,7 +114,7 @@
         .card:hover { transform: translateY(-5px); box-shadow: 0 10px 25px rgba(0,0,0,0.1); }
         .icon { font-size: 40px; margin-bottom: 15px; display: block; }
 
-        /* --- SEÇÃO DA PLANILHA (CORRIGIDA) --- */
+        /* --- SEÇÃO DA PLANILHA --- */
         .sheet-section {
             max-width: 95%; margin: 20px auto 40px;
             background: var(--card-bg); padding: 15px; border-radius: 15px;
@@ -122,20 +123,19 @@
         
         .sheet-container { 
             width: 100%; 
-            height: 700px; /* Altura ideal para visualização */
+            height: 700px; 
             border-radius: 10px; 
             border: 1px solid rgba(128,128,128,0.2); 
             overflow: hidden; 
         }
 
-        /* Garante que o iframe ocupe 100% do container */
         .sheet-container iframe { 
             width: 100% !important; 
             height: 100% !important; 
             border: none; 
         }
 
-        /* --- RODAPÉ E ASSINATURA --- */
+        /* --- RODAPÉ --- */
         .signature {
             text-align: center;
             margin: 20px 0;
@@ -159,10 +159,17 @@
 
     <button class="theme-toggle" onclick="toggleTheme()" id="themeBtn">🌙</button>
 
-    <div id="modalForm" class="modal-overlay">
+    <div id="modalSolicitacoes" class="modal-overlay">
         <div class="modal-content">
-            <span class="close-modal" onclick="closeForm()">&times;</span>
+            <span class="close-modal" onclick="closeModal('modalSolicitacoes')">&times;</span>
             <iframe src="https://forms.office.com/Pages/ResponsePage.aspx?id=fCAtUtXsx0-nbxdGSxFh-eVAzhwdpsxLmCSGMQwqNIpUM1E2TFRSRkhNWU9IQk9SVFhBSDJNWTFDVS4u&embed=true"></iframe>
+        </div>
+    </div>
+
+    <div id="modalVoucher" class="modal-overlay">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeModal('modalVoucher')">&times;</span>
+            <iframe src="https://forms.office.com/Pages/ResponsePage.aspx?id=fCAtUtXsx0-nbxdGSxFh-eVAzhwdpsxLmCSGMQwqNIpUQVBSTFlOTUxSUEMwMFhWSTdTTEVOV1lBUy4u&embed=true"></iframe>
         </div>
     </div>
 
@@ -174,11 +181,11 @@
         <h1>APOIO AO ONSITE</h1>
     </header>
 
-    <div class="container" id="cardContainer">
-        <div onclick="openForm()" class="card">
+    <div class="container">
+        <div onclick="openModal('modalSolicitacoes')" class="card">
             <span class="icon">📝</span>
             <h2>Central de Solicitações</h2>
-            <p>Clique para abrir o formulário diretamente aqui.</p>
+            <p>Clique para abrir o formulário interno.</p>
         </div>
 
         <a href="https://forms.office.com/Pages/ResponsePage.aspx?id=fCAtUtXsx0-nbxdGSxFh-f7MDqf4DUBBuOHjox7sxytUNFFQNTgzR1pQV0FLM05aWElXSjlRMjFHRy4u" target="_blank" class="card" style="border-top-color: var(--danger);">
@@ -190,8 +197,14 @@
         <a href="https://forms.office.com/Pages/ResponsePage.aspx?id=fCAtUtXsx0-nbxdGSxFh-f7MDqf4DUBBuOHjox7sxytUMzdRMTFCOTc2SzZEQzU4NFI2TVMzUjIxWS4u" target="_blank" class="card" style="border-top-color: var(--warning);">
             <span class="icon">🎧</span>
             <h2>Controle de Atendimento</h2>
-            <p>Registro e controle de atendimentos Shopee.</p>
+            <p>Registro de atendimentos Shopee.</p>
         </a>
+
+        <div onclick="openModal('modalVoucher')" class="card" style="border-top-color: var(--voucher);">
+            <span class="icon">🎫</span>
+            <h2>Cadastro Voucher</h2>
+            <p>Novo Colaborador - Cadastro de Voucher.</p>
+        </div>
     </div>
 
     <div class="sheet-section">
@@ -206,24 +219,25 @@
     <footer>© 2026 Apoio ao On-Site | WeCanBR</footer>
 
     <script>
-        // Funções da Modal
-        function openForm() {
-            document.getElementById('modalForm').style.display = 'flex';
+        // Funções para gerenciar modais
+        function openModal(modalId) {
+            document.getElementById(modalId).style.display = 'flex';
             document.body.style.overflow = 'hidden';
         }
 
-        function closeForm() {
-            document.getElementById('modalForm').style.display = 'none';
+        function closeModal(modalId) {
+            document.getElementById(modalId).style.display = 'none';
             document.body.style.overflow = 'auto';
         }
 
-        // Fecha modal ao clicar fora dela
+        // Fecha modal ao clicar fora do conteúdo branco
         window.onclick = function(event) {
-            let modal = document.getElementById('modalForm');
-            if (event.target == modal) closeForm();
+            if (event.target.className === 'modal-overlay') {
+                event.target.style.display = 'none';
+                document.body.style.overflow = 'auto';
+            }
         }
 
-        // Função do Tema Dark/Light
         function toggleTheme() {
             const html = document.documentElement;
             const btn = document.getElementById('themeBtn');

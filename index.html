@@ -36,46 +36,7 @@
             transition: 0.3s;
         }
 
-        /* --- SISTEMA DE MODAIS --- */
-        .modal-overlay {
-            display: none;
-            position: fixed;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
-            background: rgba(0, 0, 0, 0.8);
-            z-index: 3000;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .modal-content {
-            width: 95%;
-            max-width: 850px;
-            height: 90vh;
-            background: var(--card-bg);
-            border-radius: 15px;
-            position: relative;
-            overflow: hidden;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.5);
-        }
-
-        .close-modal {
-            position: absolute;
-            top: 10px; right: 20px;
-            font-size: 35px;
-            cursor: pointer;
-            color: var(--danger);
-            z-index: 3001;
-            font-weight: bold;
-        }
-
-        .modal-content iframe {
-            width: 100%;
-            height: 100%;
-            border: none;
-        }
-
-        /* --- NAVBAR --- */
+        /* --- NAVBAR & DROPDOWNS REINSTALADOS --- */
         .navbar {
             background: var(--navbar-bg);
             height: 60px;
@@ -89,15 +50,81 @@
             box-sizing: border-box;
         }
 
+        .nav-links { display: flex; align-items: center; height: 100%; }
+        .dropdown { position: relative; display: flex; align-items: center; height: 100%; }
+
+        .dropdown-btn {
+            text-decoration: none;
+            color: var(--text);
+            margin-left: 25px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            cursor: pointer;
+            border: none;
+            background: none;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            height: 100%;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            right: 0;
+            background-color: var(--card-bg);
+            min-width: 280px;
+            box-shadow: 0px 8px 16px rgba(0,0,0,0.2);
+            z-index: 1001;
+            border-radius: 0 0 8px 8px;
+            top: 60px;
+            border-top: 2px solid var(--primary);
+            overflow: hidden;
+        }
+
+        .dropdown:hover .dropdown-content { display: block; }
+        .dropdown-content a {
+            color: var(--text);
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+            font-size: 0.85rem;
+            border-bottom: 1px solid rgba(128,128,128,0.1);
+        }
+        .dropdown-content a:hover { background-color: rgba(106, 17, 203, 0.05); }
+
+        /* --- SISTEMA DE MODAIS --- */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 3000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            width: 95%; max-width: 850px; height: 90vh;
+            background: var(--card-bg); border-radius: 15px;
+            position: relative; overflow: hidden; box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+        }
+
+        .close-modal {
+            position: absolute; top: 10px; right: 20px;
+            font-size: 35px; cursor: pointer; color: var(--danger);
+            z-index: 3001; font-weight: bold;
+        }
+
+        .modal-content iframe { width: 100%; height: 100%; border: none; }
+
         /* --- HEADER --- */
         header {
             background: linear-gradient(rgba(106, 17, 203, 0.75), rgba(37, 117, 252, 0.75)), 
                         url('https://wecanbr.com.br/img/quem-somos/main.jpg');
-            background-size: cover;
-            background-position: center;
-            color: white;
-            padding: 80px 20px;
-            text-align: center;
+            background-size: cover; background-position: center;
+            color: white; padding: 70px 20px; text-align: center;
         }
 
         header h1 { font-size: 2.5rem; text-transform: uppercase; letter-spacing: 2px; margin: 0; }
@@ -114,37 +141,17 @@
         .card:hover { transform: translateY(-5px); box-shadow: 0 10px 25px rgba(0,0,0,0.1); }
         .icon { font-size: 40px; margin-bottom: 15px; display: block; }
 
-        /* --- SEÇÃO DA PLANILHA --- */
+        /* --- PLANILHA --- */
         .sheet-section {
             max-width: 95%; margin: 20px auto 40px;
             background: var(--card-bg); padding: 15px; border-radius: 15px;
             box-shadow: 0 10px 30px rgba(0,0,0,0.1);
         }
-        
-        .sheet-container { 
-            width: 100%; 
-            height: 700px; 
-            border-radius: 10px; 
-            border: 1px solid rgba(128,128,128,0.2); 
-            overflow: hidden; 
-        }
+        .sheet-container { width: 100%; height: 700px; border-radius: 10px; border: 1px solid rgba(128,128,128,0.2); overflow: hidden; }
+        .sheet-container iframe { width: 100% !important; height: 100% !important; border: none; }
 
-        .sheet-container iframe { 
-            width: 100% !important; 
-            height: 100% !important; 
-            border: none; 
-        }
-
-        /* --- RODAPÉ --- */
-        .signature {
-            text-align: center;
-            margin: 20px 0;
-            font-family: 'Great Vibes', cursive;
-            font-size: 1.5rem;
-            color: var(--signature);
-            user-select: none;
-        }
-
+        /* --- FOOTER --- */
+        .signature { text-align: center; margin: 20px 0; font-family: 'Great Vibes', cursive; font-size: 1.5rem; color: var(--signature); }
         footer { text-align: center; padding: 30px; background: #222; color: white; width: 100%; }
 
         .theme-toggle {
@@ -175,6 +182,25 @@
 
     <nav class="navbar">
         <div style="font-weight: bold; color: var(--primary); letter-spacing: 1px;">WE CAN BR</div>
+        <div class="nav-links">
+            <div class="dropdown">
+                <button class="dropdown-btn">📊 Planilhas ▼</button>
+                <div class="dropdown-content">
+                    <a href="https://desafiorhcombr-my.sharepoint.com/:x:/r/personal/mirian_oliveira_wecanbr_com_br/_layouts/15/Doc.aspx?sourcedoc=%7B9C5EACCF-57D1-4415-BA2B-D584B9FE2B85%7D" target="_blank">📋 Controle de Atendimento</a>
+                    <a href="#" target="_blank">📈 Drive de Rescisão</a>
+                    <a href="#" target="_blank">🔍 Template Shopee</a>
+                </div>
+            </div>
+            <div class="dropdown">
+                <button class="dropdown-btn">📄 Documentos ▼</button>
+                <div class="dropdown-content">
+                    <a href="#" target="_blank">Carta de Suspensão</a>
+                    <a href="#" target="_blank">Comunicado de Desligamento</a>
+                    <a href="#" target="_blank">Advertência Disciplinar</a>
+                    <a href="#" target="_blank">Termo de Ciência - EPI</a>
+                </div>
+            </div>
+        </div>
     </nav>
 
     <header>
@@ -215,11 +241,9 @@
     </div>
 
     <div class="signature">By: Edivan Costa</div>
-
     <footer>© 2026 Apoio ao On-Site | WeCanBR</footer>
 
     <script>
-        // Funções para gerenciar modais
         function openModal(modalId) {
             document.getElementById(modalId).style.display = 'flex';
             document.body.style.overflow = 'hidden';
@@ -230,7 +254,6 @@
             document.body.style.overflow = 'auto';
         }
 
-        // Fecha modal ao clicar fora do conteúdo branco
         window.onclick = function(event) {
             if (event.target.className === 'modal-overlay') {
                 event.target.style.display = 'none';

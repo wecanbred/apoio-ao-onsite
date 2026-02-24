@@ -119,7 +119,7 @@
         }
         .modal-content iframe { width: 100%; height: 100%; border: none; }
 
-        /* --- CARDS --- */
+        /* --- CARDS PRINCIPAIS --- */
         .container { display: flex; justify-content: center; flex-wrap: wrap; gap: 20px; padding: 40px 20px; max-width: 1400px; margin: 0 auto; }
         .card {
             background: var(--card-bg); border-radius: 15px; width: 280px; padding: 25px;
@@ -131,18 +131,21 @@
         .card.hidden { display: none; }
         .icon { font-size: 40px; margin-bottom: 15px; display: block; }
 
-        /* --- SEÇÃO OUTROS FORMS (RESTAURADA) --- */
+        /* --- SEÇÃO OUTROS FORMS --- */
         .others-section { max-width: 1200px; margin: 0 auto 30px; padding: 0 20px; }
-        .others-title { font-weight: bold; color: var(--primary); margin-bottom: 15px; display: flex; align-items: center; gap: 10px; }
-        .others-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 15px; }
+        .others-title { font-weight: bold; color: var(--primary); margin-bottom: 15px; display: flex; align-items: center; gap: 10px; border-bottom: 2px solid rgba(106, 17, 203, 0.1); padding-bottom: 10px; }
+        .others-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 15px; }
         .other-link {
             background: var(--card-bg); padding: 15px; border-radius: 10px;
-            text-decoration: none; color: var(--text); font-size: 0.9rem;
-            display: flex; align-items: center; gap: 10px;
+            text-decoration: none; color: var(--text);
+            display: flex; flex-direction: column; gap: 5px;
             box-shadow: 0 2px 5px rgba(0,0,0,0.05); transition: 0.2s;
-            border-left: 4px solid var(--secondary);
+            border-left: 5px solid var(--secondary);
         }
-        .other-link:hover { background: var(--secondary); color: white; transform: translateX(5px); }
+        .other-link strong { font-size: 0.85rem; color: var(--primary); }
+        .other-link span { font-size: 0.75rem; color: #666; line-height: 1.3; }
+        .other-link:hover { background: var(--secondary); transform: translateX(5px); }
+        .other-link:hover strong, .other-link:hover span { color: white; }
 
         /* --- PLANILHA --- */
         .sheet-section {
@@ -229,12 +232,12 @@
             <h2>Central de Solicitações</h2>
             <p>Clique para abrir o formulário interno.</p>
         </div>
-        <a href="https://forms.office.com/r/..." target="_blank" class="card" style="border-top-color: var(--danger);">
+        <a href="https://forms.office.com/Pages/ResponsePage.aspx?id=fCAtUtXsx0-nbxdGSxFh-f7MDqf4DUBBuOHjox7sxytUNFFQNTgzR1pQV0FLM05aWElXSjlRMjFHRy4u" target="_blank" class="card" style="border-top-color: var(--danger);">
             <span class="icon">🚫</span>
             <h2>Desligamento Shopee</h2>
             <p>Formulário oficial para desligamento.</p>
         </a>
-        <a href="https://forms.office.com/r/..." target="_blank" class="card" style="border-top-color: var(--warning);">
+        <a href="https://forms.office.com/Pages/ResponsePage.aspx?id=fCAtUtXsx0-nbxdGSxFh-f7MDqf4DUBBuOHjox7sxytUMzdRMTFCOTc2SzZEQzU4NFI2TVMzUjIxWS4u" target="_blank" class="card" style="border-top-color: var(--warning);">
             <span class="icon">🎧</span>
             <h2>Controle de Atendimento</h2>
             <p>Registro de atendimentos Shopee.</p>
@@ -249,11 +252,11 @@
     <div class="others-section">
         <div class="others-title">🔗 Outros Formulários</div>
         <div class="others-grid">
-            <a href="#" class="other-link">📌 Solicitação de Crachá</a>
-            <a href="#" class="other-link">📌 Alteração de Dados</a>
-            <a href="#" class="other-link">📌 Justificativa de Falta</a>
-            <a href="#" class="other-link">📌 Pedido de Uniforme</a>
-        </div>
+            <a href="https://forms.office.com/pages/responsepage.aspx?id=fCAtUtXsx0-nbxdGSxFh-f7MDqf4DUBBuOHjox7sxytUM1pLUFZVQjkxV1ZUNkY2RU1CWVQ1MVJZOS4u&route=shorturl" target="_blank" class="other-link">
+                <strong>REEMBOLSO DE HE / FALTAS E DESCONTOS INDEVIDOS - SHOPEE</strong>
+                <span>Solicite reembolso de faltas descontadas indevidamente, horas extras não pagas e outros ajustes em folha.</span>
+            </a>
+            </div>
     </div>
 
     <div class="sheet-section">
@@ -279,7 +282,6 @@
             let input = document.getElementById('searchInput').value.toLowerCase();
             let resultsDiv = document.getElementById('searchResults');
             let cards = document.getElementsByClassName('card');
-            let others = document.getElementsByClassName('other-link');
             let dropdownLinks = document.querySelectorAll('.dropdown-content a');
             
             resultsDiv.innerHTML = "";

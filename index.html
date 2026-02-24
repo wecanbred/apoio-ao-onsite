@@ -61,7 +61,7 @@
 
         .dropdown-content {
             display: none; position: absolute; right: 0;
-            background-color: var(--card-bg); min-width: 280px;
+            background-color: var(--card-bg); min-width: 320px;
             box-shadow: 0px 8px 16px rgba(0,0,0,0.2); z-index: 1001;
             border-radius: 0 0 8px 8px; top: 60px; border-top: 2px solid var(--primary);
             overflow: hidden;
@@ -72,6 +72,7 @@
             color: var(--text); padding: 12px 16px; text-decoration: none;
             display: block; font-size: 0.85rem; border-bottom: 1px solid rgba(128,128,128,0.1);
         }
+        .dropdown-content a:hover { background-color: rgba(106, 17, 203, 0.05); }
 
         /* --- HEADER & PESQUISA --- */
         header {
@@ -91,7 +92,7 @@
         #searchResults {
             position: absolute; top: 55px; left: 0; width: 100%;
             background: var(--card-bg); border-radius: 10px; box-shadow: 0 10px 20px rgba(0,0,0,0.2);
-            display: none; z-index: 2000; max-height: 250px; overflow-y: auto;
+            display: none; z-index: 2000; max-height: 300px; overflow-y: auto;
         }
         .result-item { display: block; padding: 12px 20px; color: var(--text); text-decoration: none; border-bottom: 1px solid rgba(128,128,128,0.1); text-align: left; }
 
@@ -170,18 +171,26 @@
             <div class="dropdown">
                 <button class="dropdown-btn">📊 Planilhas ▼</button>
                 <div class="dropdown-content">
-                    <a href="https://desafiorhcombr-my.sharepoint.com/:x:/r/personal/mirian_oliveira_wecanbr_com_br/_layouts/15/Doc.aspx?sourcedoc=%7B9C5EACCF-57D1-4415-BA2B-D584B9FE2B85%7D" target="_blank">📋 Controle de Atendimento</a>
-                    <a href="#" target="_blank">📈 Drive de Rescisão</a>
-                    <a href="#" target="_blank">🔍 Template Shopee</a>
+                    <a href="https://desafiorhcombr-my.sharepoint.com/:x:/r/personal/mirian_oliveira_wecanbr_com_br/_layouts/15/Doc.aspx?sourcedoc=%7B9C5EACCF-57D1-4415-BA2B-D584B9FE2B85%7D" target="_blank">📋 Controle de Atendimento (Excel)</a>
+                    <a href="https://desafiorhcombr-my.sharepoint.com/:x:/r/personal/mirian_oliveira_wecanbr_com_br/_layouts/15/doc2.aspx?sourcedoc=%7B519706C2-BDEF-438C-B037-385F4D8A3488%7D" target="_blank">📈 Drive de Rescisão Shopee</a>
+                    <a href="https://desafiorhcombr-my.sharepoint.com/:x:/r/personal/edivan_costa_wecanbr_com_br/_layouts/15/Doc.aspx?sourcedoc=%7B63D04DA0-C7A8-4059-8591-37DFCED94A93%7D" target="_blank">📋 Central de Solicitações (Base)</a>
+                    <a href="https://docs.google.com/spreadsheets/d/1WBYOF9AkoS7NpzhqFyqm5PzQRP13yUF2p5ZY8FfZp_c/edit" target="_blank">🔍 Template Shopee</a>
+                    <a href="https://desafiorhcombr.sharepoint.com/:x:/r/sites/FSWECANBR/_layouts/15/Doc.aspx?sourcedoc=%7B6C34C14E-1ED6-4AA2-BFC8-EB14FD1936EF%7D" target="_blank">⚠️ Rejeitos 02.2026</a>
                 </div>
             </div>
             <div class="dropdown">
                 <button class="dropdown-btn">📄 Documentos ▼</button>
                 <div class="dropdown-content">
-                    <a href="#" target="_blank">Carta de Suspensão</a>
-                    <a href="#" target="_blank">Comunicado de Desligamento</a>
-                    <a href="#" target="_blank">Advertência Disciplinar</a>
-                    <a href="#" target="_blank">Termo de Ciência - EPI</a>
+                    <a href="https://drive.google.com/file/d/1qsLtN-HC5488FVQc3n5mcT8zjCdVja0d/view" target="_blank">📄 Carta de Suspensão</a>
+                    <a href="https://drive.google.com/file/d/1lGnjwLz_5i4uASifv2OPlkSb7NUGeaHI/view" target="_blank">📄 Comunicado de Desligamento</a>
+                    <a href="https://drive.google.com/file/d/1zsrlh6KBLvMvEGc13tTA6I7Ybra5iObA/view" target="_blank">📄 Advertência Disciplinar</a>
+                    <a href="https://drive.google.com/file/d/1_Dw1qLl9icW282pkZCNln8908Nfqiasi/view" target="_blank">📄 Advertência - Ponto</a>
+                    <a href="https://drive.google.com/file/d/1aryngzuxX72mOhxchNmQPBA30QT2gNt2/view" target="_blank">📄 Carta Banco Santander</a>
+                    <a href="https://drive.google.com/file/d/1PDp_bhtDB-ZR-wRwFUJ80Xpa4gWu_HkQ/view" target="_blank">📄 Termo de Ciência - EPI</a>
+                    <a href="https://drive.google.com/file/d/1a_D1awqrBGXLaiKba6dc_ruE41dDF3ke/view" target="_blank">📄 Dispensa Justa Causa</a>
+                    <a href="https://docs.google.com/document/d/1pqJ2b7wfCbjdAuKC99cIys9RYnenn2nkACDo33isZFE/edit" target="_blank">📄 Aviso Prévio Indenizado</a>
+                    <a href="https://drive.google.com/file/d/16qsbtlkVBkIqZN_vjXK5T0gOEI7ivXWR/view" target="_blank">📄 Declaração de Vínculo</a>
+                    <a href="https://drive.google.com/file/d/1CQQ3GTIUoOW9SGZ2EZTG8O3Q3ZFHk_El/view" target="_blank">📄 DUT</a>
                 </div>
             </div>
         </div>

@@ -52,22 +52,14 @@
 
         .nav-links { display: flex; align-items: center; height: 100%; }
         
-        /* Botão de Login Microsoft */
         .login-btn {
-            text-decoration: none;
-            background: #0078d4;
-            color: white !important;
-            padding: 6px 15px;
-            border-radius: 5px;
-            font-size: 0.8rem;
-            font-weight: bold;
-            margin-left: 15px;
-            transition: 0.3s;
+            text-decoration: none; background: #0078d4; color: white !important;
+            padding: 6px 15px; border-radius: 5px; font-size: 0.8rem;
+            font-weight: bold; margin-left: 15px; transition: 0.3s;
         }
-        .login-btn:hover { background: #005a9e; opacity: 0.9; }
+        .login-btn:hover { background: #005a9e; }
 
         .dropdown { position: relative; display: flex; align-items: center; height: 100%; }
-
         .dropdown-btn {
             text-decoration: none; color: var(--text); margin-left: 25px;
             font-weight: 600; font-size: 0.9rem; cursor: pointer;
@@ -81,13 +73,11 @@
             border-radius: 0 0 8px 8px; top: 60px; border-top: 2px solid var(--primary);
             overflow: hidden;
         }
-
         .dropdown:hover .dropdown-content { display: block; }
         .dropdown-content a {
             color: var(--text); padding: 12px 16px; text-decoration: none;
             display: block; font-size: 0.85rem; border-bottom: 1px solid rgba(128,128,128,0.1);
         }
-        .dropdown-content a:hover { background-color: rgba(106, 17, 203, 0.05); }
 
         /* --- HEADER & PESQUISA --- */
         header {
@@ -141,6 +131,19 @@
         .card.hidden { display: none; }
         .icon { font-size: 40px; margin-bottom: 15px; display: block; }
 
+        /* --- SEÇÃO OUTROS FORMS (RESTAURADA) --- */
+        .others-section { max-width: 1200px; margin: 0 auto 30px; padding: 0 20px; }
+        .others-title { font-weight: bold; color: var(--primary); margin-bottom: 15px; display: flex; align-items: center; gap: 10px; }
+        .others-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 15px; }
+        .other-link {
+            background: var(--card-bg); padding: 15px; border-radius: 10px;
+            text-decoration: none; color: var(--text); font-size: 0.9rem;
+            display: flex; align-items: center; gap: 10px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05); transition: 0.2s;
+            border-left: 4px solid var(--secondary);
+        }
+        .other-link:hover { background: var(--secondary); color: white; transform: translateX(5px); }
+
         /* --- PLANILHA --- */
         .sheet-section {
             max-width: 95%; margin: 20px auto 40px;
@@ -184,7 +187,6 @@
         <div style="font-weight: bold; color: var(--primary); letter-spacing: 1px;">WE CAN BR</div>
         <div class="nav-links">
             <a href="https://portal.office.com" target="_blank" class="login-btn">🔑 Login Microsoft</a>
-
             <div class="dropdown">
                 <button class="dropdown-btn">📊 Planilhas ▼</button>
                 <div class="dropdown-content">
@@ -216,7 +218,7 @@
     <header>
         <h1>APOIO AO ONSITE</h1>
         <div class="search-container">
-            <input type="text" id="searchInput" onkeyup="buscarTudo()" placeholder="Pesquisar cards ou links..." autocomplete="off">
+            <input type="text" id="searchInput" onkeyup="buscarTudo()" placeholder="Pesquisar..." autocomplete="off">
             <div id="searchResults"></div>
         </div>
     </header>
@@ -227,23 +229,30 @@
             <h2>Central de Solicitações</h2>
             <p>Clique para abrir o formulário interno.</p>
         </div>
-
-        <a href="https://forms.office.com/Pages/ResponsePage.aspx?id=fCAtUtXsx0-nbxdGSxFh-f7MDqf4DUBBuOHjox7sxytUNFFQNTgzR1pQV0FLM05aWElXSjlRMjFHRy4u" target="_blank" class="card" style="border-top-color: var(--danger);">
+        <a href="https://forms.office.com/r/..." target="_blank" class="card" style="border-top-color: var(--danger);">
             <span class="icon">🚫</span>
             <h2>Desligamento Shopee</h2>
             <p>Formulário oficial para desligamento.</p>
         </a>
-
-        <a href="https://forms.office.com/Pages/ResponsePage.aspx?id=fCAtUtXsx0-nbxdGSxFh-f7MDqf4DUBBuOHjox7sxytUMzdRMTFCOTc2SzZEQzU4NFI2TVMzUjIxWS4u" target="_blank" class="card" style="border-top-color: var(--warning);">
+        <a href="https://forms.office.com/r/..." target="_blank" class="card" style="border-top-color: var(--warning);">
             <span class="icon">🎧</span>
             <h2>Controle de Atendimento</h2>
             <p>Registro de atendimentos Shopee.</p>
         </a>
-
         <div onclick="openModal('modalVoucher')" class="card" style="border-top-color: var(--voucher);">
             <span class="icon">🎫</span>
             <h2>Cadastro Voucher</h2>
             <p>Novo Colaborador - Cadastro de Voucher.</p>
+        </div>
+    </div>
+
+    <div class="others-section">
+        <div class="others-title">🔗 Outros Formulários</div>
+        <div class="others-grid">
+            <a href="#" class="other-link">📌 Solicitação de Crachá</a>
+            <a href="#" class="other-link">📌 Alteração de Dados</a>
+            <a href="#" class="other-link">📌 Justificativa de Falta</a>
+            <a href="#" class="other-link">📌 Pedido de Uniforme</a>
         </div>
     </div>
 
@@ -262,16 +271,15 @@
             document.getElementById(modalId).style.display = 'flex';
             document.body.style.overflow = 'hidden';
         }
-
         function closeModal(modalId) {
             document.getElementById(modalId).style.display = 'none';
             document.body.style.overflow = 'auto';
         }
-
         function buscarTudo() {
             let input = document.getElementById('searchInput').value.toLowerCase();
             let resultsDiv = document.getElementById('searchResults');
             let cards = document.getElementsByClassName('card');
+            let others = document.getElementsByClassName('other-link');
             let dropdownLinks = document.querySelectorAll('.dropdown-content a');
             
             resultsDiv.innerHTML = "";
@@ -281,28 +289,25 @@
                 return;
             }
 
-            let achouNoMenu = false;
+            let found = false;
             dropdownLinks.forEach(link => {
                 if (link.innerText.toLowerCase().includes(input)) {
-                    achouNoMenu = true;
+                    found = true;
                     resultsDiv.innerHTML += `<a href="${link.href}" target="_blank" class="result-item">🔗 ${link.innerText}</a>`;
                 }
             });
 
             for (let card of cards) {
-                let textoCard = card.innerText.toLowerCase();
-                card.classList.toggle('hidden', !textoCard.includes(input));
+                card.classList.toggle('hidden', !card.innerText.toLowerCase().includes(input));
             }
-            resultsDiv.style.display = achouNoMenu ? "block" : "none";
+            resultsDiv.style.display = found ? "block" : "none";
         }
-
         window.onclick = function(event) {
             if (event.target.className === 'modal-overlay') {
                 event.target.style.display = 'none';
                 document.body.style.overflow = 'auto';
             }
         }
-
         function toggleTheme() {
             const html = document.documentElement;
             const btn = document.getElementById('themeBtn');

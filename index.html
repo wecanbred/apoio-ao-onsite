@@ -101,24 +101,6 @@
         }
         .result-item { display: block; padding: 12px 20px; color: var(--text); text-decoration: none; border-bottom: 1px solid rgba(128,128,128,0.1); text-align: left; }
 
-        /* --- MODAIS --- */
-        .modal-overlay {
-            display: none; position: fixed; top: 0; left: 0;
-            width: 100%; height: 100%; background: rgba(0, 0, 0, 0.8);
-            z-index: 3000; justify-content: center; align-items: center;
-        }
-        .modal-content {
-            width: 95%; max-width: 850px; height: 90vh;
-            background: var(--card-bg); border-radius: 15px;
-            position: relative; overflow: hidden; box-shadow: 0 10px 40px rgba(0,0,0,0.5);
-        }
-        .close-modal {
-            position: absolute; top: 10px; right: 20px;
-            font-size: 35px; cursor: pointer; color: var(--danger);
-            z-index: 3001; font-weight: bold;
-        }
-        .modal-content iframe { width: 100%; height: 100%; border: none; }
-
         /* --- CARDS PRINCIPAIS --- */
         .container { display: flex; justify-content: center; flex-wrap: wrap; gap: 20px; padding: 40px 20px; max-width: 1400px; margin: 0 auto; }
         .card {
@@ -172,20 +154,6 @@
 
     <button class="theme-toggle" onclick="toggleTheme()" id="themeBtn">🌙</button>
 
-    <div id="modalSolicitacoes" class="modal-overlay">
-        <div class="modal-content">
-            <span class="close-modal" onclick="closeModal('modalSolicitacoes')">&times;</span>
-            <iframe src="https://forms.office.com/Pages/ResponsePage.aspx?id=fCAtUtXsx0-nbxdGSxFh-eVAzhwdpsxLmCSGMQwqNIpUM1E2TFRSRkhNWU9IQk9SVFhBSDJNWTFDVS4u&embed=true"></iframe>
-        </div>
-    </div>
-
-    <div id="modalVoucher" class="modal-overlay">
-        <div class="modal-content">
-            <span class="close-modal" onclick="closeModal('modalVoucher')">&times;</span>
-            <iframe src="https://forms.office.com/Pages/ResponsePage.aspx?id=fCAtUtXsx0-nbxdGSxFh-eVAzhwdpsxLmCSGMQwqNIpUQVBSTFlOTUxSUEMwMFhWSTdTTEVOV1lBUy4u&embed=true"></iframe>
-        </div>
-    </div>
-
     <nav class="navbar">
         <div style="font-weight: bold; color: var(--primary); letter-spacing: 1px;">WE CAN BR</div>
         <div class="nav-links">
@@ -227,26 +195,29 @@
     </header>
 
     <div class="container" id="cardContainer">
-        <div onclick="openModal('modalSolicitacoes')" class="card">
+        <a href="https://forms.office.com/Pages/ResponsePage.aspx?id=fCAtUtXsx0-nbxdGSxFh-eVAzhwdpsxLmCSGMQwqNIpUM1E2TFRSRkhNWU9IQk9SVFhBSDJNWTFDVS4u" target="_blank" class="card">
             <span class="icon">📝</span>
             <h2>Central de Solicitações</h2>
             <p>Clique para abrir o formulário interno.</p>
-        </div>
+        </a>
+
         <a href="https://forms.office.com/Pages/ResponsePage.aspx?id=fCAtUtXsx0-nbxdGSxFh-f7MDqf4DUBBuOHjox7sxytUNFFQNTgzR1pQV0FLM05aWElXSjlRMjFHRy4u" target="_blank" class="card" style="border-top-color: var(--danger);">
             <span class="icon">🚫</span>
             <h2>Desligamento Shopee</h2>
             <p>Formulário oficial para desligamento.</p>
         </a>
+
         <a href="https://forms.office.com/Pages/ResponsePage.aspx?id=fCAtUtXsx0-nbxdGSxFh-f7MDqf4DUBBuOHjox7sxytUMzdRMTFCOTc2SzZEQzU4NFI2TVMzUjIxWS4u" target="_blank" class="card" style="border-top-color: var(--warning);">
             <span class="icon">🎧</span>
             <h2>Controle de Atendimento</h2>
             <p>Registro de atendimentos Shopee.</p>
         </a>
-        <div onclick="openModal('modalVoucher')" class="card" style="border-top-color: var(--voucher);">
+
+        <a href="https://forms.office.com/Pages/ResponsePage.aspx?id=fCAtUtXsx0-nbxdGSxFh-eVAzhwdpsxLmCSGMQwqNIpUQVBSTFlOTUxSUEMwMFhWSTdTTEVOV1lBUy4u" target="_blank" class="card" style="border-top-color: var(--voucher);">
             <span class="icon">🎫</span>
             <h2>Cadastro Voucher</h2>
             <p>Novo Colaborador - Cadastro de Voucher.</p>
-        </div>
+        </a>
     </div>
 
     <div class="others-section">
@@ -256,7 +227,7 @@
                 <strong>REEMBOLSO DE HE / FALTAS E DESCONTOS INDEVIDOS - SHOPEE</strong>
                 <span>Solicite reembolso de faltas descontadas indevidamente, horas extras não pagas e outros ajustes em folha.</span>
             </a>
-            </div>
+        </div>
     </div>
 
     <div class="sheet-section">
@@ -270,14 +241,6 @@
     <footer>© 2026 Apoio ao On-Site | WeCanBR</footer>
 
     <script>
-        function openModal(modalId) {
-            document.getElementById(modalId).style.display = 'flex';
-            document.body.style.overflow = 'hidden';
-        }
-        function closeModal(modalId) {
-            document.getElementById(modalId).style.display = 'none';
-            document.body.style.overflow = 'auto';
-        }
         function buscarTudo() {
             let input = document.getElementById('searchInput').value.toLowerCase();
             let resultsDiv = document.getElementById('searchResults');
@@ -304,12 +267,7 @@
             }
             resultsDiv.style.display = found ? "block" : "none";
         }
-        window.onclick = function(event) {
-            if (event.target.className === 'modal-overlay') {
-                event.target.style.display = 'none';
-                document.body.style.overflow = 'auto';
-            }
-        }
+
         function toggleTheme() {
             const html = document.documentElement;
             const btn = document.getElementById('themeBtn');
